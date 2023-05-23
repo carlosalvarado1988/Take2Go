@@ -1,6 +1,21 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 import { Avatar, Button, Card, Text } from "react-native-paper";
+
+const Title = styled.Text`
+  padding: 26px;
+  font-size: 40px;
+`;
+
+const BusinessCard = styled(Card)`
+  padding: 3px;
+  backgroundcolor: white;
+`;
+
+const BusinessCardCover = styled(Card.Cover)`
+  padding: 3px;
+  backgroundcolor: gray;
+`;
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
@@ -18,22 +33,21 @@ export const BusinessInfoCard = ({ business = {} }) => {
   } = business;
 
   return (
-    <Card elevation={5} style={styles.card}>
-      <Card.Title title={name} subtitle="Card Subtitle" left={LeftContent} />
-      <Card.Content>
-        <Text variant="titleLarge">Card title</Text>
-        <Text variant="bodyMedium">Card content</Text>
-      </Card.Content>
-      <Card.Cover key={name} source={{ uri: photos[0] }} style={styles.cover} />
-      <Card.Actions>
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Card.Actions>
-    </Card>
+    <>
+      <BusinessCard elevation={5}>
+        <Card.Title title={name} subtitle="Card Subtitle" left={LeftContent} />
+        <Card.Content>
+          <Text variant="titleLarge">Card title</Text>
+          <Text variant="bodyMedium">Card content</Text>
+          <Title>Some title here</Title>
+        </Card.Content>
+        <BusinessCardCover key={name} source={{ uri: photos[0] }} />
+
+        <Card.Actions>
+          <Button>Cancel</Button>
+          <Button>Ok</Button>
+        </Card.Actions>
+      </BusinessCard>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  card: { padding: 3, backgroundColor: "white" },
-  cover: { padding: 3, backgroundColor: "gray" },
-});
