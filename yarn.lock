@@ -1643,6 +1643,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo-google-fonts/lato@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/lato@npm:0.2.3"
+  checksum: b0e9a1675bdf6eca84918f893069bae8adccb2bba8477a7603cc4b11a43df608915af466219819db012fb60ec429574fc18fc56d604255d1d6373849c5ce735e
+  languageName: node
+  linkType: hard
+
+"@expo-google-fonts/oswald@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/oswald@npm:0.2.3"
+  checksum: d60d79539265b7145bc72196ae82dd23a6c466d01af26afc2c97f55d283fd4b23110cf6d39f6adf5bec1a9d8823d99d48703dd5d3c56e76bb980d0972573bfec
+  languageName: node
+  linkType: hard
+
 "@expo/bunyan@npm:4.0.0, @expo/bunyan@npm:^4.0.0":
   version: 4.0.0
   resolution: "@expo/bunyan@npm:4.0.0"
@@ -10160,10 +10174,13 @@ __metadata:
   resolution: "take2go@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
+    "@expo-google-fonts/lato": ^0.2.3
+    "@expo-google-fonts/oswald": ^0.2.3
     "@react-native-community/eslint-config": ^3.2.0
     eslint: ^8.41.0
     eslint-plugin-prettier: ^4.2.1
     expo: ~48.0.15
+    expo-font: ~11.1.1
     expo-status-bar: ~1.4.4
     postcss: ^8.4.23
     postcss-loader: ^7.3.0

@@ -7,17 +7,17 @@ import { BusinessInfoCard } from "../components/businessInfoCard.component";
 
 const SafeAreaViewContainer = styled.SafeAreaView`
   flex: 1;
-  margin-top: ${StatusBar.currentHeight}px;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
 const SearchContainer = styled.View`
-  padding: 10px;
+  padding: ${(props) => props.theme.space[3]};
 `;
 
 const ListContainer = styled.View`
   flex: 1;
-  padding: 10px;
-  background-color: green;
+  padding: ${(props) => props.theme.space[2]};
+  background-color: ${(props) => props.theme.colors.ui.primary};
 `;
 
 export const BusinessScreen = () => {
