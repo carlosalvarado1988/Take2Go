@@ -3,8 +3,9 @@ import { Image, Text } from "react-native";
 import { Card } from "react-native-paper";
 
 export const BusinessCard = styled(Card)`
-  padding: ${(props) => props.theme.space[1]};
   backgroundcolor: ${(props) => props.theme.colors.ui.secondary};
+  padding: ${(props) => props.theme.space[1]};
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 export const BusinessCardCover = styled(Card.Cover)`

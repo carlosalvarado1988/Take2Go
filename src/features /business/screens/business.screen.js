@@ -1,24 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components/native";
 import { Searchbar } from "react-native-paper";
-import { StatusBar } from "react-native";
 
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
-
-const SafeAreaViewContainer = styled.SafeAreaView`
-  flex: 1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`;
-
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const ListContainer = styled.View`
-  flex: 1;
-  padding: ${(props) => props.theme.space[2]};
-  background-color: ${(props) => props.theme.colors.ui.primary};
-`;
+import {
+  SafeAreaViewContainer,
+  SearchContainer,
+  BusinessList,
+} from "./business.screen.styles";
 
 export const BusinessScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,9 +21,26 @@ export const BusinessScreen = () => {
           value={searchQuery}
         />
       </SearchContainer>
-      <ListContainer>
-        <BusinessInfoCard />
-      </ListContainer>
+      <BusinessList
+        data={[
+          { name: 1 },
+          { name: 2 },
+          { name: 3 },
+          { name: 4 },
+          { name: 5 },
+          { name: 6 },
+          { name: 7 },
+          { name: 8 },
+          { name: 9 },
+          { name: 10 },
+          { name: 11 },
+          { name: 12 },
+          { name: 13 },
+          { name: 14 },
+        ]}
+        renderItem={() => <BusinessInfoCard />}
+        keyExtractor={(item) => item.name}
+      />
     </SafeAreaViewContainer>
   );
 };
