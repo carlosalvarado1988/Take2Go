@@ -27,6 +27,7 @@ export const BusinessInfoCard = ({ business = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId = "place_id",
   } = business;
   const ratingArray = Array.from(new Array(Math.ceil(rating)));
   return (
@@ -39,7 +40,12 @@ export const BusinessInfoCard = ({ business = {} }) => {
           <IconsLine>
             <Rating>
               {ratingArray.map((_, i) => (
-                <SvgXml xml={star} key={i} width={20} height={20} />
+                <SvgXml
+                  key={`star-${placeId}-${i}`}
+                  xml={star}
+                  width={20}
+                  height={20}
+                />
               ))}
             </Rating>
             <SectionEnd>
