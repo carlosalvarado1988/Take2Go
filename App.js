@@ -4,15 +4,18 @@ import { Text } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { Ionicons } from "@expo/vector-icons";
 
 import { BusinessScreen } from "./src/features /business/screens/business.screen";
 import { SafeAreaViewContainer } from "./src/components/utilities/safe-area.component";
+import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
 
 import { theme } from "./src/infrastructure/theme";
 
@@ -52,6 +55,8 @@ const createScreenOptions = ({ route }) => {
     tabBarIcon: ({ size, color }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),
+    tabBarActiveTintColor: "tomato",
+    tabBarInactiveTintColor: "gray",
   };
 };
 
@@ -66,19 +71,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-            }}
-          >
-            <Tab.Screen name="Business" component={BusinessScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name="Business" component={BusinessScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

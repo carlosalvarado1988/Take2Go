@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Searchbar } from "react-native-paper";
 
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
 import { SearchContainer, BusinessList } from "./business.screen.styles";
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
+import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 
 export const BusinessScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
-
+  const { restaurants } = useContext(RestaurantContext);
   return (
     <SafeAreaViewContainer>
       <SearchContainer>
@@ -19,22 +20,7 @@ export const BusinessScreen = () => {
         />
       </SearchContainer>
       <BusinessList
-        data={[
-          { name: 1 },
-          { name: 2 },
-          { name: 3 },
-          { name: 4 },
-          { name: 5 },
-          { name: 6 },
-          { name: 7 },
-          { name: 8 },
-          { name: 9 },
-          { name: 10 },
-          { name: 11 },
-          { name: 12 },
-          { name: 13 },
-          { name: 14 },
-        ]}
+        data={restaurants}
         renderItem={() => <BusinessInfoCard />}
         keyExtractor={(item) => item.name}
       />
