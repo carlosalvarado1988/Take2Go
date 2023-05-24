@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { MD2Colors } from "react-native-paper";
 
+import { Search } from "../components/search.component";
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
 import {
   BusinessList,
@@ -11,7 +12,7 @@ import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.c
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 
 export const BusinessScreen = () => {
-  const { restaurants, isLoading, error } = useContext(RestaurantContext);
+  const { restaurants, isLoading } = useContext(RestaurantContext);
   return (
     <SafeAreaViewContainer>
       {isLoading && (
@@ -19,6 +20,7 @@ export const BusinessScreen = () => {
           <LoadingIcon size={50} animating={true} color={MD2Colors.red800} />
         </LoadingContainer>
       )}
+      <Search />
       <BusinessList
         data={restaurants}
         renderItem={({ item }) => {
