@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useMemo } from "react";
+import React, { useState, createContext, useEffect } from "react";
 
 import {
   restaurantsRequest,
@@ -12,7 +12,7 @@ export const RestaurantContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchRestaurantsData = () => {
+  const fetchRestaurantsMockData = () => {
     setIsLoading(true);
     setTimeout(() => {
       restaurantsRequest()
@@ -29,7 +29,7 @@ export const RestaurantContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchRestaurantsData();
+    fetchRestaurantsMockData();
   }, []);
 
   return (

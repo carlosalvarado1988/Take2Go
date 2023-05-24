@@ -9,6 +9,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { BusinessScreen } from "./src/features /business/screens/business.screen";
 import { SafeAreaViewContainer } from "./src/components/utilities/safe-area.component";
+import { LocationContextProvider } from "./src/services/location/location.context";
+
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import {
   useFonts as useOswald,
@@ -69,15 +71,17 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator screenOptions={createScreenOptions}>
-              <Tab.Screen name="Business" component={BusinessScreen} />
-              <Tab.Screen name="Map" component={MapScreen} />
-              <Tab.Screen name="Settings" component={SettingsScreen} />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </RestaurantContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <NavigationContainer>
+              <Tab.Navigator screenOptions={createScreenOptions}>
+                <Tab.Screen name="Business" component={BusinessScreen} />
+                <Tab.Screen name="Map" component={MapScreen} />
+                <Tab.Screen name="Settings" component={SettingsScreen} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </RestaurantContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
