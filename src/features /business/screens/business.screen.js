@@ -21,7 +21,9 @@ export const BusinessScreen = () => {
       </SearchContainer>
       <BusinessList
         data={restaurants}
-        renderItem={() => <BusinessInfoCard />}
+        renderItem={({ item }) => {
+          return <BusinessInfoCard business={item} />;
+        }}
         keyExtractor={(item) => item.name}
       />
     </SafeAreaViewContainer>

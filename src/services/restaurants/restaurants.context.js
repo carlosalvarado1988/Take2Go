@@ -8,25 +8,36 @@ import {
 export const RestaurantContext = createContext();
 
 export const RestaurantContextProvider = ({ children }) => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchRestaurantsData = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      restaurantsRequest()
+        .then(restaurantsTransform)
+        .then((results) => {
+          setIsLoading(false);
+          setRestaurants(results);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(err);
+        });
+    }, 2000);
+  };
+
+  useEffect(() => {
+    fetchRestaurantsData();
+  }, []);
+
   return (
     <RestaurantContext.Provider
       value={{
-        restaurants: [
-          { name: 1 },
-          { name: 2 },
-          { name: 3 },
-          { name: 4 },
-          { name: 5 },
-          { name: 6 },
-          { name: 7 },
-          { name: 8 },
-          { name: 9 },
-          { name: 10 },
-          { name: 11 },
-          { name: 12 },
-          { name: 13 },
-          { name: 14 },
-        ],
+        restaurants,
+        isLoading,
+        error,
       }}
     >
       {children}

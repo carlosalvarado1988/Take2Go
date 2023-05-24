@@ -15,8 +15,6 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 
-import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
-
 import { theme } from "./src/infrastructure/theme";
 
 const Tab = createBottomTabNavigator();
