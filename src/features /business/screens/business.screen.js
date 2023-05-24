@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
 
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
-import {
-  SafeAreaViewContainer,
-  SearchContainer,
-  BusinessList,
-} from "./business.screen.styles";
+import { SearchContainer, BusinessList } from "./business.screen.styles";
+import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 
 export const BusinessScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
