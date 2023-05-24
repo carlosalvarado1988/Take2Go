@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MD2Colors } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 
 import { Search } from "../components/search.component";
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
@@ -11,7 +12,7 @@ import {
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 
-export const BusinessScreen = () => {
+export const BusinessScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantContext);
   return (
     <SafeAreaViewContainer>
@@ -24,7 +25,13 @@ export const BusinessScreen = () => {
       <BusinessList
         data={restaurants}
         renderItem={({ item }) => {
-          return <BusinessInfoCard business={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("RestaurantDetail")}
+            >
+              <BusinessInfoCard business={item} />
+            </TouchableOpacity>
+          );
         }}
         keyExtractor={(item) => item.name}
       />
