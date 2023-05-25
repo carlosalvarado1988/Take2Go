@@ -4,8 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { RestaurantNavigator } from "./restaurants.navigator";
 import { SafeAreaViewContainer } from "../../components/utilities/safe-area.component";
+import { RestaurantNavigator } from "./restaurants.navigator";
+import { MapScreen } from "../../features/map/screens/map.screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,17 +23,6 @@ function SettingsScreen() {
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
       <Text>Settings!</Text>
-    </SafeAreaViewContainer>
-  );
-}
-
-function MapScreen() {
-  return (
-    <SafeAreaViewContainer
-      // eslint-disable-next-line react-native/no-inline-styles
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>Map!</Text>
     </SafeAreaViewContainer>
   );
 }
