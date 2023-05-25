@@ -7,6 +7,7 @@ import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.c
 
 export const BusinessDetailsScreen = ({ route }) => {
   const { business } = route.params;
+
   const [breakfastListExpanded, setBreakfastListExpanded] = useState(false);
   const [lunchListExpanded, setLunchListExpanded] = useState(false);
   const [dinnerListExpanded, setDinnerListExpanded] = useState(false);

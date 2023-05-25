@@ -1,19 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Marker } from "react-native-maps";
+import { Marker, Callout } from "react-native-maps";
 
 import { Map } from "./map-screen.styles";
 import { Search } from "../components/search.component";
+import { MapCallout } from "../components/map-callout.component";
 
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantContext);
-  console.log(
-    "🚀 ~ file: map.screen.js:13 ~ MapScreen ~ restaurants:",
-    restaurants
-  );
+
   const [latDelta, setLatDelta] = useState(0);
   const { lat, lng, viewport } = location;
 
@@ -43,7 +41,17 @@ export const MapScreen = () => {
                 latitude: restaurant.geometry.location.lat,
                 longitude: restaurant.geometry.location.lng,
               }}
-            />
+            >
+              <Callout
+                onPress={() => {
+                  navigation.navigate("RestaurantDetail", {
+                    business: restaurant,
+                  });
+                }}
+              >
+                <MapCallout restaurant={restaurant} />
+              </Callout>
+            </Marker>
           );
         })}
       </Map>
