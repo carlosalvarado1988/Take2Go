@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AntDesing } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
 import { FavoritesContext } from "../../services/favorites/favorites.context";
@@ -16,10 +16,16 @@ const FavoriteButton = styled(TouchableOpacity)`
 export const Favorite = () => {
   const { favorites, addFavorites, removeFavorites } =
     useContext(FavoritesContext);
+  console.log(
+    "🚀 ~ file: favorite.component.js:18 ~ Favorite ~ favorites, addFavorites, removeFavorites:",
+    favorites,
+    addFavorites,
+    removeFavorites
+  );
 
   return (
     <FavoriteButton>
-      <AntDesing name="hearth" size={24} color="red" />
+      <AntDesign name="hearth" size={24} color="red" />
     </FavoriteButton>
   );
 };
