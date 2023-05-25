@@ -11,15 +11,10 @@ import {
 } from "./business.screen.styles";
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
-import { FavoritesContext } from "../../../services/favorites/favorites.context";
 
 export const BusinessScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantContext);
-  const { favorites } = useContext(FavoritesContext);
-  console.log(
-    "🚀 ~ file: business.screen.js:19 ~ BusinessScreen ~ favorites:",
-    favorites
-  );
+
   return (
     <SafeAreaViewContainer>
       {isLoading && (
