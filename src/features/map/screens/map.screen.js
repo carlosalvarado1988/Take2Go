@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Marker } from "react-native-maps";
 
 import { Map } from "./map-screen.styles";
 import { Search } from "../components/search.component";
@@ -9,6 +10,10 @@ import { RestaurantContext } from "../../../services/restaurants/restaurants.con
 export const MapScreen = () => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantContext);
+  console.log(
+    "🚀 ~ file: map.screen.js:13 ~ MapScreen ~ restaurants:",
+    restaurants
+  );
   const [latDelta, setLatDelta] = useState(0);
   const { lat, lng, viewport } = location;
 
@@ -30,7 +35,16 @@ export const MapScreen = () => {
         }}
       >
         {restaurants.map((restaurant) => {
-          return null;
+          return (
+            <Marker
+              key={restaurant.name}
+              title={restaurant.name}
+              coordinate={{
+                latitude: restaurant.geometry.location.lat,
+                longitude: restaurant.geometry.location.lng,
+              }}
+            />
+          );
         })}
       </Map>
     </>
