@@ -4,6 +4,7 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 import { Navigation } from "./src/infrastructure/navigation";
+import { FavoritesContextProvider } from "./src/services/favorites/favorites.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import {
@@ -24,11 +25,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantContextProvider>
-            <Navigation />
-          </RestaurantContextProvider>
-        </LocationContextProvider>
+        <FavoritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantContextProvider>
+              <Navigation />
+            </RestaurantContextProvider>
+          </LocationContextProvider>
+        </FavoritesContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
