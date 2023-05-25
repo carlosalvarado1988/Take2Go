@@ -27,7 +27,9 @@ export const BusinessScreen = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate("RestaurantDetail")}
+              onPress={() =>
+                navigation.navigate("RestaurantDetail", { business: item })
+              }
             >
               <BusinessInfoCard business={item} />
             </TouchableOpacity>

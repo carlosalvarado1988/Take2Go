@@ -1,18 +1,17 @@
 import React from "react";
-import { Text } from "react-native";
 import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack";
 
 import { BusinessScreen } from "../../features /business/screens/business.screen";
+import { BusinessDetailsScreen } from "../../features /business/screens/business-details.screen";
 
 const RestaurantStack = createStackNavigator();
 
 export const RestaurantNavigator = () => {
   return (
     <RestaurantStack.Navigator
-      headerMode="none"
       screenOptions={{
         ...TransitionPresets.ModalPresentationIOS,
       }}
@@ -20,8 +19,7 @@ export const RestaurantNavigator = () => {
       <RestaurantStack.Screen name="Restaurants" component={BusinessScreen} />
       <RestaurantStack.Screen
         name="RestaurantDetail"
-        // eslint-disable-next-line react/no-unstable-nested-components
-        component={() => <Text>Detail page</Text>}
+        component={BusinessDetailsScreen}
       />
     </RestaurantStack.Navigator>
   );
