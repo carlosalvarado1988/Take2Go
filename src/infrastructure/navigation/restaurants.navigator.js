@@ -4,8 +4,8 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 
-import { BusinessScreen } from "../../features /business/screens/business.screen";
-import { BusinessDetailsScreen } from "../../features /business/screens/business-details.screen";
+import { BusinessScreen } from "../../features/business/screens/business.screen";
+import { BusinessDetailsScreen } from "../../features/business/screens/business-details.screen";
 
 const RestaurantStack = createStackNavigator();
 
@@ -14,6 +14,7 @@ export const RestaurantNavigator = () => {
     <RestaurantStack.Navigator
       screenOptions={{
         ...TransitionPresets.ModalPresentationIOS,
+        headerShown: false,
       }}
     >
       <RestaurantStack.Screen name="Restaurants" component={BusinessScreen} />

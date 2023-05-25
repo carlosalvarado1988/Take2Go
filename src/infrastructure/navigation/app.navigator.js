@@ -4,8 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { RestaurantNavigator } from "./restaurants.navigator";
 import { SafeAreaViewContainer } from "../../components/utilities/safe-area.component";
+import { RestaurantNavigator } from "./restaurants.navigator";
+import { MapScreen } from "../../features/map/screens/map.screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,17 +27,6 @@ function SettingsScreen() {
   );
 }
 
-function MapScreen() {
-  return (
-    <SafeAreaViewContainer
-      // eslint-disable-next-line react-native/no-inline-styles
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>Map!</Text>
-    </SafeAreaViewContainer>
-  );
-}
-
 const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
   return {
@@ -45,6 +35,7 @@ const createScreenOptions = ({ route }) => {
     ),
     tabBarActiveTintColor: "tomato",
     tabBarInactiveTintColor: "gray",
+    headerShown: false,
   };
 };
 
