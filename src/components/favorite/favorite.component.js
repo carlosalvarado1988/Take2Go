@@ -17,6 +17,7 @@ export const Favorite = ({ restaurant }) => {
   const { favorites, addFavorites, removeFromFavorites } =
     useContext(FavoritesContext);
 
+  // TODO: performance improvement here, bottleneck in a large set of data
   const isFavorite = favorites.find((x) => x.placeId === restaurant.placeId);
 
   return (
