@@ -35,7 +35,7 @@ export const BusinessInfoCard = ({ business = {} }) => {
     <>
       <BusinessCard elevation={5}>
         <BusinessCardCover key={name} source={{ uri: photos[0] }} />
-        <Favorite />
+        <Favorite restaurant={business} />
         <Section>
           <Text variant="label">{name}</Text>
           <IconsLine>
