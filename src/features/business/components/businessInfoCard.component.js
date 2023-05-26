@@ -12,6 +12,7 @@ import {
 } from "./businessInfoCard.styles";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { Favorite } from "../../../components/favorite/favorite.component";
 
 import star from "../../../../assets/star.js";
 import open from "../../../../assets/open.js";
@@ -34,7 +35,7 @@ export const BusinessInfoCard = ({ business = {} }) => {
     <>
       <BusinessCard elevation={5}>
         <BusinessCardCover key={name} source={{ uri: photos[0] }} />
-
+        <Favorite restaurant={business} />
         <Section>
           <Text variant="label">{name}</Text>
           <IconsLine>
