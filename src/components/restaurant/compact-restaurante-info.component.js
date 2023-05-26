@@ -8,9 +8,9 @@ import {
   CompactImageIOS,
 } from "./compact.restaurant-info.styles";
 
-export const CompactRestaurantInfo = ({ restaurant }) => {
+export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
   const isAndroid = Platform.OS === "android";
-  const Image = isAndroid ? CompactWebViewAndroid : CompactImageIOS;
+  const Image = isAndroid && isMap ? CompactWebViewAndroid : CompactImageIOS;
   return (
     <Item>
       <Image source={{ uri: restaurant.photos[0] }} />
