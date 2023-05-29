@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { Navigation } from "./src/infrastructure/navigation";
+import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
 import { FavoritesContextProvider } from "./src/services/favorites/favorites.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
@@ -37,10 +38,8 @@ export default function App() {
   console.log("🚀 ~ file: App.js:37 ~ App ~ isAuthenticated:", isAuthenticated);
 
   useEffect(() => {
-    console.log("🚀 ~ file: App.js:40 ~ useEffect ~ INITIALIZED:");
     signInWithEmailAndPassword(auth, "carlos@gmail.com", "testuser")
       .then((user) => {
-        console.log("🚀 ~ file: App.js:38 ~ .then ~ user:", user);
         setIsAuthenticated(true);
       })
       .catch((err) => {
@@ -55,13 +54,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavoritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <Navigation />
-            </RestaurantContextProvider>
-          </LocationContextProvider>
-        </FavoritesContextProvider>
+        <AuthenticationProvider>
+          <FavoritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantContextProvider>
+                <Navigation />
+              </RestaurantContextProvider>
+            </LocationContextProvider>
+          </FavoritesContextProvider>
+        </AuthenticationProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
