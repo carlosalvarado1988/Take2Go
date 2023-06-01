@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
-import { LoginResquest } from "./authentication.service";
+import React, { createContext, useState, useRef } from "react";
+import { getAuth } from "firebase/auth";
 
+import { loginRequest } from "./authentication.service";
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
@@ -8,16 +9,18 @@ export const AuthenticationProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const auth = useRef(getAuth()).current;
+
   const onLogin = (username, password) => {
     setIsLoading(true);
-    LoginResquest(username, password)
+    loginRequest(auth, username, password)
       .then((u) => {
         setIsLoading(false);
         setUser(u);
       })
       .catch((e) => {
         setIsLoading(false);
-        setError(e);
+        setError(e.toString(e));
       });
   };
 
