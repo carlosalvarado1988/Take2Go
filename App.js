@@ -8,9 +8,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
-import { FavoritesContextProvider } from "./src/services/favorites/favorites.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
-import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { theme } from "./src/infrastructure/theme";
 import {
   useFonts as useOswald,
@@ -55,13 +52,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationProvider>
-          <FavoritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantContextProvider>
-                <Navigation />
-              </RestaurantContextProvider>
-            </LocationContextProvider>
-          </FavoritesContextProvider>
+          <Navigation />
         </AuthenticationProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
