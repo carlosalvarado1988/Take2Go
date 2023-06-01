@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text } from "react-native";
+import { Button } from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import { SafeAreaViewContainer } from "../../components/utilities/safe-area.component";
 import { RestaurantNavigator } from "./restaurants.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
-
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
@@ -16,12 +17,16 @@ const TAB_ICON = {
 };
 
 function SettingsScreen() {
+  const { onLogout } = useContext(AuthenticationContext);
   return (
     <SafeAreaViewContainer
       // eslint-disable-next-line react-native/no-inline-styles
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
       <Text>Settings!</Text>
+      <Button mode="outlined" onPress={onLogout}>
+        Logout
+      </Button>
     </SafeAreaViewContainer>
   );
 }

@@ -1,7 +1,11 @@
 import React, { createContext, useState, useRef } from "react";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import { loginRequest, registerRequest } from "./authentication.service";
+import {
+  loginRequest,
+  registerRequest,
+  requestLogOut,
+} from "./authentication.service";
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
@@ -9,7 +13,18 @@ export const AuthenticationProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Firebase auth instance
   const auth = useRef(getAuth()).current;
+
+  // Observable to check if user authenticated on refresh or start on cold
+  onAuthStateChanged(auth, (usr) => {
+    if (usr) {
+      setUser(usr);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
 
   const onLogin = (email, password) => {
     setIsLoading(true);
@@ -45,6 +60,13 @@ export const AuthenticationProvider = ({ children }) => {
       });
   };
 
+  const onLogout = () => {
+    requestLogOut(auth).then(() => {
+      setUser(null);
+      setError(null);
+    });
+  };
+
   return (
     <AuthenticationContext.Provider
       value={{
@@ -54,6 +76,7 @@ export const AuthenticationProvider = ({ children }) => {
         error,
         onLogin,
         onRegister,
+        onLogout,
       }}
     >
       {children}
