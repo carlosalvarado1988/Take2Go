@@ -41,6 +41,7 @@ export const AuthInput = styled(TextInput)`
 export const Title = styled(Text)`
   font-size: 30px;
 `;
+
 export const ErrorContainer = styled.View`
   max-width: 300px;
   align-items: center;
@@ -51,5 +52,14 @@ export const ErrorContainer = styled.View`
 
 export const LoadingIndicator = styled(ActivityIndicator)`
   color: ${(props) => props.theme.colors.brand.primary};
+  padding: ${(props) => props.theme.space[2]};
+`;
+
+export const LottieAnimationContainer = styled.View`
+  position: absolute;
+  top: 12%;
+  left: 10px;
+  width: 100%;
+  height: 20%;
   padding: ${(props) => props.theme.space[2]};
 `;
