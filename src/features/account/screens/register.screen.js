@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+
 import {
   ImageBackground,
   AccountCover,
@@ -7,6 +8,7 @@ import {
   AuthInput,
   Title,
   ErrorContainer,
+  LoadingIndicator,
 } from "../components/account-background.styles";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
@@ -19,7 +21,7 @@ export const RegisterScreen = ({ navigation }) => {
   const [repeatedPassword, setRepeatedPassword] = useState("");
 
   const [registerError, setRegisterError] = useState("");
-  const { onRegister, error } = useContext(AuthenticationContext);
+  const { onRegister, isLoading, error } = useContext(AuthenticationContext);
 
   useEffect(() => {
     setRegisterError(error);
@@ -72,13 +74,17 @@ export const RegisterScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="email-outline"
-            mode="contained"
-            onPress={() => onRegister(email, password, repeatedPassword)}
-          >
-            Register
-          </AuthButton>
+          {isLoading ? (
+            <LoadingIndicator animating={true} />
+          ) : (
+            <AuthButton
+              icon="email-outline"
+              mode="contained"
+              onPress={() => onRegister(email, password, repeatedPassword)}
+            >
+              Register
+            </AuthButton>
+          )}
         </Spacer>
       </AccountContainer>
       <Spacer size="large">

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+
 import {
   ImageBackground,
   AccountCover,
@@ -7,6 +8,7 @@ import {
   AuthInput,
   Title,
   ErrorContainer,
+  LoadingIndicator,
 } from "../components/account-background.styles";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
@@ -17,7 +19,7 @@ export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  const { onLogin, error } = useContext(AuthenticationContext);
+  const { onLogin, isLoading, error } = useContext(AuthenticationContext);
 
   useEffect(() => {
     setLoginError(error);
@@ -59,13 +61,17 @@ export const LoginScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="lock-open-check-outline"
-            mode="contained"
-            onPress={() => onLogin(email, password)}
-          >
-            Login
-          </AuthButton>
+          {isLoading ? (
+            <LoadingIndicator animating={true} />
+          ) : (
+            <AuthButton
+              icon="lock-open-check-outline"
+              mode="contained"
+              onPress={() => onLogin(email, password)}
+            >
+              Login
+            </AuthButton>
+          )}
         </Spacer>
       </AccountContainer>
       <Spacer size="large">
