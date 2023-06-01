@@ -5,16 +5,18 @@ import {
   AccountCover,
   AccountContainer,
   AuthButton,
+  Title,
 } from "../components/account-background.styles";
 
 export const AccountScreen = ({ navigation }) => {
   return (
     <ImageBackground>
       <AccountCover />
+      <Title>Catalog</Title>
       <AccountContainer>
         <AuthButton
           icon="lock-open-check-outline"
-          mode="outlined"
+          mode="contained"
           onPress={() => navigation.navigate("Login")}
         >
           Login
