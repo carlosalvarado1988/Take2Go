@@ -1,7 +1,7 @@
 import React, { createContext, useState, useRef } from "react";
 import { getAuth } from "firebase/auth";
 
-import { loginRequest } from "./authentication.service";
+import { loginRequest, registerRequest } from "./authentication.service";
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
@@ -11,9 +11,9 @@ export const AuthenticationProvider = ({ children }) => {
 
   const auth = useRef(getAuth()).current;
 
-  const onLogin = (username, password) => {
+  const onLogin = (email, password) => {
     setIsLoading(true);
-    loginRequest(auth, username, password)
+    loginRequest(auth, email, password)
       .then((u) => {
         setIsLoading(false);
         setUser(u);
@@ -24,9 +24,37 @@ export const AuthenticationProvider = ({ children }) => {
       });
   };
 
+  const onRegister = (email, password, repeatedPassword) => {
+    if (password !== repeatedPassword) {
+      setError("Error: passwords do not match");
+      return;
+    }
+    setIsLoading(true);
+    registerRequest(auth, email, password)
+      .then((newUser) => {
+        console.log(
+          "🚀 ~ file: authentication.context.js:35 ~ .then ~ newUser:",
+          newUser
+        );
+        setIsLoading(false);
+        setUser(newUser);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.toString(e));
+      });
+  };
+
   return (
     <AuthenticationContext.Provider
-      value={{ isAutheticated: !!user, user, isLoading, error, onLogin }}
+      value={{
+        isAuthenticated: !!user,
+        user,
+        isLoading,
+        error,
+        onLogin,
+        onRegister,
+      }}
     >
       {children}
     </AuthenticationContext.Provider>
