@@ -4,11 +4,9 @@ import { TouchableOpacity } from "react-native";
 
 import { Search } from "../components/search.component";
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
-import {
-  BusinessList,
-  LoadingContainer,
-  LoadingIcon,
-} from "./business.screen.styles";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { LoadingContainer, LoadingIcon } from "./business.screen.styles";
+import { BusinessList } from "../../common/components/business-list.styles";
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 import { FavoritesBar } from "../../../components/favorite/favorite-bar.component";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
@@ -43,7 +41,9 @@ export const BusinessScreen = ({ navigation }) => {
                 navigation.navigate("RestaurantDetail", { business: item })
               }
             >
-              <BusinessInfoCard business={item} />
+              <Spacer position="bottom" size="large">
+                <BusinessInfoCard business={item} />
+              </Spacer>
             </TouchableOpacity>
           );
         }}
