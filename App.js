@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
@@ -24,25 +23,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+initializeApp(firebaseConfig);
 
 export default function App() {
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
   const [latoLoaded] = useLato({ Lato_400Regular });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log("🚀 ~ file: App.js:37 ~ App ~ isAuthenticated:", isAuthenticated);
-
-  useEffect(() => {
-    signInWithEmailAndPassword(auth, "carlos@gmail.com", "testuser")
-      .then((user) => {
-        setIsAuthenticated(true);
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.js:41 ~ useEffect ~ err:", err);
-      });
-  }, []);
 
   if (!oswaldLoaded && !latoLoaded) {
     return null;
