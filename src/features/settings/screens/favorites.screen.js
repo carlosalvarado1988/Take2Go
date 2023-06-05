@@ -8,6 +8,7 @@ import { BusinessList } from "../../common/components/business-list.styles";
 import { NoFavoritesArea } from "./favorites.styles";
 import { BusinessInfoCard } from "../../business/components/businessInfoCard.component";
 import { FavoritesContext } from "../../../services/favorites/favorites.context";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 export const FavoritesScreen = ({ navigation }) => {
   const { favorites } = useContext(FavoritesContext);
@@ -24,7 +25,9 @@ export const FavoritesScreen = ({ navigation }) => {
               }
             >
               <Spacer position="bottom" size="large">
-                <BusinessInfoCard business={item} />
+                <FadeInView>
+                  <BusinessInfoCard business={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );

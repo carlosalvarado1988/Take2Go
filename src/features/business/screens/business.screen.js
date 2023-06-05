@@ -11,6 +11,7 @@ import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.c
 import { FavoritesBar } from "../../../components/favorite/favorite-bar.component";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 import { FavoritesContext } from "../../../services/favorites/favorites.context";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 export const BusinessScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantContext);
@@ -42,7 +43,9 @@ export const BusinessScreen = ({ navigation }) => {
               }
             >
               <Spacer position="bottom" size="large">
-                <BusinessInfoCard business={item} />
+                <FadeInView>
+                  <BusinessInfoCard business={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );
