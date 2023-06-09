@@ -17,7 +17,7 @@ export const SettingsNavigator = () => {
         headerMode: "screen",
       }}
     >
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="Main" component={SettingsScreen} />
       <SettingsStack.Screen name="Favorites" component={FavoritesScreen} />
     </SettingsStack.Navigator>
   );
