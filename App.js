@@ -14,12 +14,13 @@ import {
 } from "@expo-google-fonts/oswald";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ0UUsWHbSoV5DgjPfVhlRzlHXgu-6-Gc",
-  authDomain: "take2go-93862.firebaseapp.com",
-  projectId: "take2go-93862",
-  storageBucket: "take2go-93862.appspot.com",
-  messagingSenderId: "390361688647",
-  appId: "1:390361688647:web:b990b918909e89d5379f62",
+  apiKey: "AIzaSyAnPSaWsG-XmuFA0Qar4V-IdN9Mm-IP-So",
+  authDomain: "catalog-25e27.firebaseapp.com",
+  projectId: "catalog-25e27",
+  storageBucket: "catalog-25e27.appspot.com",
+  messagingSenderId: "300029222865",
+  appId: "1:300029222865:web:e79b2680ad4b76e9a78af0",
+  measurementId: "G-NY7T419GGR",
 };
 
 // Initialize Firebase
