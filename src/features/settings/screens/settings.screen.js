@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { List, Avatar } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
@@ -23,11 +24,13 @@ export function SettingsScreen({ navigation }) {
   return (
     <SafeAreaViewContainer>
       <AvatarContainer>
-        <Avatar.Icon
-          icon="human"
-          size={180}
-          backgroundColor={colors.brand.primary}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+          <Avatar.Icon
+            icon="human"
+            size={180}
+            backgroundColor={colors.brand.primary}
+          />
+        </TouchableOpacity>
         <Spacer position="top" size="large">
           <Text variant="label">{user?.email}</Text>
         </Spacer>
