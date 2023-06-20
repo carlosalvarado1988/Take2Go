@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-
-import { Linking } from "react-native";
 import { useCameraPermissions } from "expo-image-picker";
+import { Linking } from "react-native";
 
 export const useCameraPermission = () => {
   const [status, requestPermissions] = useCameraPermissions();

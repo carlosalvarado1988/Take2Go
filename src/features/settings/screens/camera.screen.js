@@ -1,20 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { TouchableOpacity, View, Button } from "react-native";
-import { Camera, CameraType } from "expo-camera";
+import { CameraType } from "expo-camera";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useCameraPermission } from "../hooks/useCameraPermissions.hook";
 import { Text } from "../../../components/typography/text.component";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { ProfileCamera } from "./camera.styles";
 
-import styled from "styled-components/native";
-
-const ProfileCamera = styled(Camera)`
-  width: 100%;
-  height: 100%;
-`;
-
-export const CameraScreen = () => {
+export const CameraScreen = ({ navigation }) => {
   const [type, setType] = useState(CameraType.front);
-  // const [hasPermission] = Camera.useCameraPermissions();
   const [status, requestPermissionAgain] = useCameraPermission();
+  const { user } = useContext(AuthenticationContext);
   const cameraRef = useRef();
 
   const toggleCameraType = () => {
@@ -25,7 +22,8 @@ export const CameraScreen = () => {
   const snapFoto = async () => {
     if (cameraRef) {
       const photo = await cameraRef.current.takePictureAsync();
-      console.log("🚀 ~ file: camera.screen.js:27 ~ snapFoto ~ photo:", photo);
+      AsyncStorage.setItem(`${user.uid}-photo`, photo.uri);
+      navigation.goBack();
     }
   };
 
@@ -48,16 +46,19 @@ export const CameraScreen = () => {
 
   return (
     <View>
-      <ProfileCamera type={type} ref={(camera) => (cameraRef.current = camera)}>
-        <View>
-          <TouchableOpacity onPress={toggleCameraType}>
-            <Text>Flip Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={snapFoto}>
-            <Text>Take Foto</Text>
-          </TouchableOpacity>
-        </View>
-      </ProfileCamera>
+      <TouchableOpacity onPress={snapFoto}>
+        <ProfileCamera
+          type={type}
+          ref={(camera) => (cameraRef.current = camera)}
+          ratio={"16:9"}
+        >
+          <View>
+            <TouchableOpacity onPress={toggleCameraType}>
+              <Text>Flip Camera</Text>
+            </TouchableOpacity>
+          </View>
+        </ProfileCamera>
+      </TouchableOpacity>
     </View>
   );
 };
