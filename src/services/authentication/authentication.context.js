@@ -6,6 +6,7 @@ import {
   registerRequest,
   requestLogOut,
 } from "./authentication.service";
+
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
@@ -47,10 +48,6 @@ export const AuthenticationProvider = ({ children }) => {
     setIsLoading(true);
     registerRequest(auth, email, password)
       .then((newUser) => {
-        console.log(
-          "🚀 ~ file: authentication.context.js:35 ~ .then ~ newUser:",
-          newUser
-        );
         setIsLoading(false);
         setUser(newUser);
       })

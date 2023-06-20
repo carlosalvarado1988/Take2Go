@@ -6,6 +6,7 @@ import {
 
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
 import { FavoritesScreen } from "../../features/settings/screens/favorites.screen";
+import { CameraScreen } from "../../features/settings/screens/camera.screen";
 
 const SettingsStack = createStackNavigator();
 
@@ -17,8 +18,9 @@ export const SettingsNavigator = () => {
         headerMode: "screen",
       }}
     >
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="Main" component={SettingsScreen} />
       <SettingsStack.Screen name="Favorites" component={FavoritesScreen} />
+      <SettingsStack.Screen name="Camera" component={CameraScreen} />
     </SettingsStack.Navigator>
   );
 };

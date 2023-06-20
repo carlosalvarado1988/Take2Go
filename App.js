@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  initializeAuth,
+  getReactNativePersistence,
+} from "firebase/auth/react-native";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
@@ -15,34 +18,23 @@ import {
 } from "@expo-google-fonts/oswald";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ0UUsWHbSoV5DgjPfVhlRzlHXgu-6-Gc",
-  authDomain: "take2go-93862.firebaseapp.com",
-  projectId: "take2go-93862",
-  storageBucket: "take2go-93862.appspot.com",
-  messagingSenderId: "390361688647",
-  appId: "1:390361688647:web:b990b918909e89d5379f62",
+  apiKey: "AIzaSyAnPSaWsG-XmuFA0Qar4V-IdN9Mm-IP-So",
+  authDomain: "catalog-25e27.firebaseapp.com",
+  projectId: "catalog-25e27",
+  storageBucket: "catalog-25e27.appspot.com",
+  messagingSenderId: "300029222865",
+  appId: "1:300029222865:web:e79b2680ad4b76e9a78af0",
+  measurementId: "G-NY7T419GGR",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+initializeAuth(initializeApp(firebaseConfig), {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
 
 export default function App() {
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
   const [latoLoaded] = useLato({ Lato_400Regular });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log("🚀 ~ file: App.js:37 ~ App ~ isAuthenticated:", isAuthenticated);
-
-  useEffect(() => {
-    signInWithEmailAndPassword(auth, "carlos@gmail.com", "testuser")
-      .then((user) => {
-        setIsAuthenticated(true);
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.js:41 ~ useEffect ~ err:", err);
-      });
-  }, []);
 
   if (!oswaldLoaded && !latoLoaded) {
     return null;
