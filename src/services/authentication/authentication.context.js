@@ -6,6 +6,7 @@ import {
   registerRequest,
   requestLogOut,
 } from "./authentication.service";
+
 export const AuthenticationContext = createContext();
 
 export const AuthenticationProvider = ({ children }) => {
@@ -18,10 +19,6 @@ export const AuthenticationProvider = ({ children }) => {
 
   // Observable to check if user authenticated on refresh or start on cold
   onAuthStateChanged(auth, (usr) => {
-    console.log(
-      "🚀 ~ file: authentication.context.js:22 ~ onAuthStateChanged ~ usr:",
-      usr
-    );
     if (usr) {
       setUser(usr);
       setIsLoading(false);

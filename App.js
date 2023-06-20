@@ -2,7 +2,11 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  initializeAuth,
+  getReactNativePersistence,
+} from "firebase/auth/react-native";
 import { initializeApp } from "firebase/app";
 
 import { Navigation } from "./src/infrastructure/navigation";
@@ -24,7 +28,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+initializeAuth(initializeApp(firebaseConfig), {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
 
 export default function App() {
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
