@@ -17,14 +17,25 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 
+// PAY-AS-YOU-GO Firebase/Catalog
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBFrYGYOWUeCGcqqPqm5PwmVCUAhS3NYwc",
+//   authDomain: "catalog-12a8d.firebaseapp.com",
+//   projectId: "catalog-12a8d",
+//   storageBucket: "catalog-12a8d.appspot.com",
+//   messagingSenderId: "580440551087",
+//   appId: "1:580440551087:web:ac2fc3b9789532c975ae5a",
+//   measurementId: "G-F2T5QEBV9P",
+// };
+
+// FREE Firebase/Catalog-dev
 const firebaseConfig = {
-  apiKey: "AIzaSyAnPSaWsG-XmuFA0Qar4V-IdN9Mm-IP-So",
-  authDomain: "catalog-25e27.firebaseapp.com",
-  projectId: "catalog-25e27",
-  storageBucket: "catalog-25e27.appspot.com",
-  messagingSenderId: "300029222865",
-  appId: "1:300029222865:web:e79b2680ad4b76e9a78af0",
-  measurementId: "G-NY7T419GGR",
+  apiKey: "AIzaSyCbGFb4NzoGUOWLDX90o0V7eXbLMn5uCM4",
+  authDomain: "catalog-dev-d9b6d.firebaseapp.com",
+  projectId: "catalog-dev-d9b6d",
+  storageBucket: "catalog-dev-d9b6d.appspot.com",
+  messagingSenderId: "780296218276",
+  appId: "1:780296218276:web:47c97a1a9a0c4b55102831",
 };
 
 // Initialize Firebase
