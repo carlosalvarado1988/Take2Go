@@ -23,10 +23,18 @@ export const LocationContextProvider = ({ children }) => {
     locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       .then((result) => {
+        console.log(
+          "🚀 ~ file: location.context.js:26 ~ .then ~ result:",
+          result
+        );
         setIsLoading(false);
         setLocation(result);
       })
       .catch((err) => {
+        console.log(
+          "🚀 ~ file: location.context.js:30 ~ useEffect ~ err:",
+          err
+        );
         setIsLoading(false);
         setError(err);
       });
