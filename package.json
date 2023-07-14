@@ -2,6 +2,10 @@
   "name": "catalog",
   "version": "0.0.1",
   "main": "node_modules/expo/AppEntry.js",
+  "engines": {
+    "node": "18",
+    "npm": "9"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
