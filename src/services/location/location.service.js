@@ -1,32 +1,27 @@
 import camelize from "camelize";
-// import { locations } from "./location.mock";
+import { DB_SOURCE, FIREBASE_API_URL } from "@env";
+
+import { locations } from "./location.mock";
+import { FIREBASE_DB } from "../../utils/constants";
+
+const fetchMockLocation = (term) =>
+  new Promise((resolve, reject) => {
+    const locationMock = locations[term];
+    if (!locationMock) {
+      reject("not found");
+    }
+    resolve(locationMock);
+  });
 
 export const locationRequest = (searchTerm) => {
-  return fetch(
-    `http://127.0.0.1:5001/catalog-12a8d/us-central1/geocode?city=${searchTerm}`
-  ).then((res) => res.json());
-  // .then((res) => {
-  //   const results = res.json();
-  //   console.log(
-  //     "🚀 ~ file: location.service.js:9 ~ ).then ~ results:",
-  //     results
-  //   );
-  //   if (results.length === 0) {
-  //     throw "Not Found";
-  //   }
-  //   return results;
-  // })
+  if (DB_SOURCE === FIREBASE_DB) {
+    return fetch(`${FIREBASE_API_URL}/geocode?city=${searchTerm}`).then((res) =>
+      res.json()
+    );
+  } else {
+    return fetchMockLocation(searchTerm);
+  }
 };
-
-// export const locationRequest = (searchTerm) => {
-//   return new Promise((resolve, reject) => {
-//     const locationMock = locations[searchTerm];
-//     if (!locationMock) {
-//       reject("not found");
-//     }
-//     resolve(locationMock);
-//   });
-// };
 
 export const locationTransform = (result) => {
   const formattedResponse = camelize(result);

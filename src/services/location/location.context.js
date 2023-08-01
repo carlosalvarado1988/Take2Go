@@ -20,11 +20,12 @@ export const LocationContextProvider = ({ children }) => {
       // don't do the search
       return;
     }
+
     locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       .then((result) => {
         console.log(
-          "🚀 ~ file: location.context.js:26 ~ .then ~ result:",
+          "🚀 ~ file: location.context.js:27 ~ .then ~ result:",
           result
         );
         setIsLoading(false);
