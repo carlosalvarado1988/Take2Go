@@ -3,11 +3,20 @@ import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { initializeApp } from "firebase/app";
 import {
   initializeAuth,
   getReactNativePersistence,
 } from "firebase/auth/react-native";
-import { initializeApp } from "firebase/app";
+import {
+  FIREBASE_API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID,
+} from "@env";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
@@ -17,25 +26,14 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 
-// PAY-AS-YOU-GO Firebase/Catalog
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBFrYGYOWUeCGcqqPqm5PwmVCUAhS3NYwc",
-//   authDomain: "catalog-12a8d.firebaseapp.com",
-//   projectId: "catalog-12a8d",
-//   storageBucket: "catalog-12a8d.appspot.com",
-//   messagingSenderId: "580440551087",
-//   appId: "1:580440551087:web:ac2fc3b9789532c975ae5a",
-//   measurementId: "G-F2T5QEBV9P",
-// };
-
-// FREE Firebase/Catalog-dev
 const firebaseConfig = {
-  apiKey: "AIzaSyCbGFb4NzoGUOWLDX90o0V7eXbLMn5uCM4",
-  authDomain: "catalog-dev-d9b6d.firebaseapp.com",
-  projectId: "catalog-dev-d9b6d",
-  storageBucket: "catalog-dev-d9b6d.appspot.com",
-  messagingSenderId: "780296218276",
-  appId: "1:780296218276:web:47c97a1a9a0c4b55102831",
+  apiKey: FIREBASE_API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID,
 };
 
 // Initialize Firebase
