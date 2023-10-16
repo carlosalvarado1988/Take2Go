@@ -25,6 +25,7 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
+import { getFunctionsHost } from "./src/services/utils/env";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -48,6 +49,11 @@ export default function App() {
   if (!oswaldLoaded && !latoLoaded) {
     return null;
   }
+
+  console.log(
+    "NODE_ENV (Google Functions in productions will charge)",
+    process.env.NODE_ENV
+  );
 
   return (
     <>

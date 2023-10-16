@@ -1,8 +1,8 @@
-import { DB_SOURCE, FIREBASE_API_URL } from "@env";
+import { DB_SOURCE } from "@env";
 import camelize from "camelize";
 
 import { mocks, mockImages } from "./mock";
-import { FIREBASE_DB } from "../../utils/constants";
+import { getFunctionsHost, FIREBASE_DB } from "../utils/env";
 
 const fetchMockRestaurants = (loc) =>
   new Promise((resolve, reject) => {
@@ -15,9 +15,9 @@ const fetchMockRestaurants = (loc) =>
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
   if (DB_SOURCE === FIREBASE_DB) {
-    return fetch(`${FIREBASE_API_URL}/placesNearby?location=${location}`).then(
-      (res) => res.json()
-    );
+    const host = getFunctionsHost("placesnearby");
+    console.log("firebase api call - placesNearby - host", host);
+    return fetch(`${host}?location=${location}`).then((res) => res.json());
   } else {
     return fetchMockRestaurants(location);
   }

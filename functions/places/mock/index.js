@@ -20,6 +20,7 @@ const mockImages = [
   "https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg",
 ];
 
+// function in charge to add a mock image to the restaurantes from the function itself
 module.exports.addMockImage = (restaurant) => {
   const randomImage =
     mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];

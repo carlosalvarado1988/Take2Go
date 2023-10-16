@@ -1,8 +1,8 @@
 import camelize from "camelize";
-import { DB_SOURCE, FIREBASE_API_URL } from "@env";
+import { DB_SOURCE } from "@env";
 
 import { locations } from "./location.mock";
-import { FIREBASE_DB } from "../../utils/constants";
+import { getFunctionsHost, FIREBASE_DB } from "../utils/env";
 
 const fetchMockLocation = (term) =>
   new Promise((resolve, reject) => {
@@ -15,9 +15,9 @@ const fetchMockLocation = (term) =>
 
 export const locationRequest = (searchTerm) => {
   if (DB_SOURCE === FIREBASE_DB) {
-    return fetch(`${FIREBASE_API_URL}/geocode?city=${searchTerm}`).then((res) =>
-      res.json()
-    );
+    const host = getFunctionsHost("geocode");
+    console.log("firebase api call - geocode, host - ", host);
+    return fetch(`${host}?city=${searchTerm}`).then((res) => res.json());
   } else {
     return fetchMockLocation(searchTerm);
   }
