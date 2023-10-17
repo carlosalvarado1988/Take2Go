@@ -1,6 +1,8 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ToastProvider, Toast } from "react-native-toast-notifications";
+
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app";
@@ -9,6 +11,7 @@ import {
   getReactNativePersistence,
 } from "firebase/auth/react-native";
 import {
+  DB_SOURCE,
   FIREBASE_API_KEY,
   AUTH_DOMAIN,
   PROJECT_ID,
@@ -25,7 +28,7 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { getFunctionsHost } from "./src/services/utils/env";
+import { FIREBASE_DB } from "./src/services/utils/env";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -50,16 +53,34 @@ export default function App() {
     return null;
   }
 
-  console.log(
-    "NODE_ENV (Google Functions in productions will charge)",
-    process.env.NODE_ENV
-  );
+  console.log("## DB_SOURCE:", DB_SOURCE);
+  if (DB_SOURCE === FIREBASE_DB) {
+    console.log(
+      "## NODE_ENV (Google Functions in productions will charge)",
+      process.env.NODE_ENV
+    );
+  }
+  // const toastGlobalRef = (ref) => (global["toast"] = ref);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationProvider>
-          <Navigation />
+          <ToastProvider
+            placement="bottom"
+            duration={5000}
+            animationType="slide-in"
+            animationDuration={250}
+            successColor="green"
+            dangerColor="red"
+            warningColor="orange"
+            normalColor="gray"
+            offsetTop={30}
+            offsetBottom={40}
+            swipeEnabled={true}
+          >
+            <Navigation />
+          </ToastProvider>
         </AuthenticationProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
