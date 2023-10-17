@@ -6,25 +6,28 @@ import { getFunctionsHost, FIREBASE_DB } from "../utils/env";
 
 const fetchMockRestaurants = (loc) =>
   new Promise((resolve, reject) => {
+    console.log("## fetchMockRestaurants");
     const mock = mocks[loc];
     if (!mock) {
-      reject("Not found");
+      return reject("Not found");
     }
-    resolve(mock);
+    return resolve(mock);
   });
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
   if (DB_SOURCE === FIREBASE_DB) {
     const host = getFunctionsHost("placesnearby");
-    console.log("firebase api call - placesNearby - host", host);
-    return fetch(`${host}?location=${location}`).then((res) => res.json());
+    const searchUrl = `${host}?location=${location}`;
+    console.log("restaurantsRequest ~ searchUrl:", searchUrl);
+    return fetch(searchUrl).then((res) => res.json());
   } else {
     return fetchMockRestaurants(location);
   }
 };
 
-export const restaurantsTransform = ({ results = [] }) =>
-  camelize(
+export const restaurantsTransform = ({ results = [] }) => {
+  console.log("restaurantsRequest ~ results:", results.length);
+  return camelize(
     results.map((restaurant) => {
       const enhancedRestaurant = {
         ...restaurant,
@@ -42,3 +45,4 @@ export const restaurantsTransform = ({ results = [] }) =>
       return enhancedRestaurant;
     })
   );
+};

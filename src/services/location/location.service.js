@@ -6,24 +6,38 @@ import { getFunctionsHost, FIREBASE_DB } from "../utils/env";
 
 const fetchMockLocation = (term) =>
   new Promise((resolve, reject) => {
+    console.log("## fetchMockLocation");
     const locationMock = locations[term];
+    console.log(
+      "🚀 ~ file: location.service.js:11 ~ newPromise ~ locationMock:",
+      locationMock
+    );
     if (!locationMock) {
-      reject("not found");
+      console.log("are we in reject????");
+      return reject("not found");
     }
-    resolve(locationMock);
+    return resolve(locationMock);
   });
 
 export const locationRequest = (searchTerm) => {
   if (DB_SOURCE === FIREBASE_DB) {
     const host = getFunctionsHost("geocode");
-    console.log("firebase api call - geocode, host - ", host);
-    return fetch(`${host}?city=${searchTerm}`).then((res) => res.json());
+    const searchUrl = `${host}?city=${searchTerm}`;
+    console.log(
+      "location.service.js:22 ~ locationRequest ~ searchUrl:",
+      searchUrl
+    );
+    return fetch(searchUrl).then((res) => res.json());
   } else {
     return fetchMockLocation(searchTerm);
   }
 };
 
 export const locationTransform = (result) => {
+  console.log(
+    "🚀 ~ file: location.service.js:27 ~ locationTransform ~ result:",
+    result.results[0]
+  );
   const formattedResponse = camelize(result);
   const { geometry = {} } = formattedResponse.results[0];
   const { lat, lng } = geometry.location;

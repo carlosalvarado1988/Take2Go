@@ -84,6 +84,10 @@ Note each function has its own base url:
 
   You can pass NODE_ENV value as convinient
 
+  > npm run ios-dev
+
+  this will ensure, we run local serve functions that connect with Google API
+
 ## Services
 
 - note that services have been separated in concern, build as a context provider to have accees to data within the app at any level.
@@ -142,3 +146,5 @@ Note each function has its own base url:
 
   - taking a look to the module in the library [github](https://github.com/googlemaps/google-maps-services-js/blob/master/src/places/placesnearby.ts)
   -
+
+  ## Note changes in functions, need re-deploy to firebase functions

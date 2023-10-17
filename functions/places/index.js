@@ -14,7 +14,7 @@ module.exports.placesRequest = (req, res, client) => {
     .placesNearby({
       params: {
         location,
-        radius: 1500,
+        radius: 1500, // represents metters
         type: "restaurants",
         key: process.env.MAPS_API_KEY_GCP,
       },

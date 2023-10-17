@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { ToastProvider, Toast } from "react-native-toast-notifications";
+import { ToastProvider } from "react-native-toast-notifications";
 
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -60,7 +60,6 @@ export default function App() {
       process.env.NODE_ENV
     );
   }
-  // const toastGlobalRef = (ref) => (global["toast"] = ref);
 
   return (
     <>

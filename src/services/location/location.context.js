@@ -1,10 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
-
+import { useToast } from "react-native-toast-notifications";
 import { locationRequest, locationTransform } from "./location.service";
 
 export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
+  const toast = useToast();
   const [location, setLocation] = useState([]);
   const [keyword, setKeyword] = useState("San Francisco");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,9 +29,13 @@ export const LocationContextProvider = ({ children }) => {
         setLocation(result);
       })
       .catch((err) => {
+        toast.show(err, {
+          type: "danger",
+        });
         setIsLoading(false);
         setError(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   return (

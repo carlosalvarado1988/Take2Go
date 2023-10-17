@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
+import { useToast } from "react-native-toast-notifications";
 
 import {
   restaurantsRequest,
@@ -12,10 +13,10 @@ export const RestaurantContextProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const toast = useToast();
   const { location } = useContext(LocationContext);
 
-  const fetchRestaurantsMockData = (loc) => {
+  const fetchRestaurantsData = (loc) => {
     setIsLoading(true);
     setRestaurants([]);
     restaurantsRequest(`${loc.lat},${loc.lng}`)
@@ -25,6 +26,9 @@ export const RestaurantContextProvider = ({ children }) => {
         setRestaurants(results);
       })
       .catch((err) => {
+        toast.show(err, {
+          type: "danger",
+        });
         setIsLoading(false);
         setError(err);
       });
@@ -32,8 +36,9 @@ export const RestaurantContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (location) {
-      fetchRestaurantsMockData(location);
+      fetchRestaurantsData(location);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
