@@ -18,10 +18,10 @@ const client = new Client({});
 
 exports.geocode = onRequest((req, res) => {
   logger.info("geocode function trigged", { structuredData: true });
-  geocodeRequest(req, res);
+  geocodeRequest(req, res, client);
 });
 
 exports.placesNearby = onRequest((req, res) => {
   logger.info("placesNearby function trigged", { structuredData: true });
-  placesRequest(req, res);
+  placesRequest(req, res, client);
 });

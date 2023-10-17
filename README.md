@@ -125,3 +125,20 @@ Note each function has its own base url:
   - With these lines, we interact with the google api client we created to fetch real data instead of mock data.
 
   - to persist our mock work, you add a query param. eg= ?mock=true , to determine if use local mock data in the function
+
+    - eg: `http://127.0.0.1:5001/catalog-12a8d/us-central1/geocode?city=toronto&mock=true`
+
+  - To our function we add the client:
+    `module.exports.geocodeRequest = (req, res, client) => {})` which is coming for the instance in index.js and now we can fetch using the SDK
+
+  - #### [configure env variables for firebase](https://firebase.google.com/docs/functions/config-env?gen=2nd)
+
+    - Using .env approach (different from videos)
+    - now we can use as: ` key: process.env.MAPS_API_KEY_GCP,`
+
+  - now we can get geo info from seattle even: `http://127.0.0.1:5001/catalog-12a8d/us-central1/geocode?city=seattle`
+
+  ### Implementing client.placesNearby from googple api
+
+  - taking a look to the module in the library [github](https://github.com/googlemaps/google-maps-services-js/blob/master/src/places/placesnearby.ts)
+  -
