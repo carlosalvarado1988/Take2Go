@@ -1,6 +1,6 @@
 const url = require("url");
 const { mocks, addMockImage } = require("./mock");
-const { log } = require("firebase-functions/logger");
+const { log, debug } = require("firebase-functions/logger");
 
 module.exports.placesRequest = (req, res, client) => {
   const { location, mock } = url.parse(req.url, true).query;
@@ -58,6 +58,8 @@ function getGooglePhotoFromPlaceApi(restaurant) {
 
   // check photo_reference exists to use liveUrl, if not, mock img
   restaurant.photos = [!photo_reference ? mockImgUrl : liveGoogleImgUrl];
-  log("## getGooglePhotoFromPlaceApi - restaurant.photos", restaurant.photos);
+  debug("## getGooglePhotoFromPlaceApi - restaurant.photos", {
+    getGooglePhotoFromPlaceApi: restaurant.photos,
+  });
   return restaurant;
 }
