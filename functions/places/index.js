@@ -1,11 +1,11 @@
 const url = require("url");
 const { mocks, addMockImage } = require("./mock");
-const { log, debug } = require("firebase-functions/logger");
+require("firebase-functions/logger/compat");
 
 module.exports.placesRequest = (req, res, client) => {
   const { location, mock } = url.parse(req.url, true).query;
   if (mock) {
-    log("## geocodeRequest has used locationMock");
+    console.log("## geocodeRequest has used locationMock");
     const data = mocks[location];
     if (data) {
       data.results = data.results.map(addMockImage);
@@ -13,7 +13,7 @@ module.exports.placesRequest = (req, res, client) => {
     }
   }
 
-  log("### placesRequest using Google API geocode with Client");
+  console.log("### placesRequest using Google API geocode with Client");
   const params = {
     location,
     radius: 1500, // represents metters
@@ -34,7 +34,7 @@ module.exports.placesRequest = (req, res, client) => {
       return res.json(response.data);
     })
     .catch((err) => {
-      log("## client GOOGLE API err", err);
+      console.log("## client GOOGLE API err", err);
       res.status(400);
       return res.send(err.response.data.error_message);
     });
@@ -58,8 +58,9 @@ function getGooglePhotoFromPlaceApi(restaurant) {
 
   // check photo_reference exists to use liveUrl, if not, mock img
   restaurant.photos = [!photo_reference ? mockImgUrl : liveGoogleImgUrl];
-  debug("## getGooglePhotoFromPlaceApi - restaurant.photos", {
-    getGooglePhotoFromPlaceApi: restaurant.photos,
-  });
+  console.log(
+    "## getGooglePhotoFromPlaceApi - restaurant.photos",
+    restaurant.photos
+  );
   return restaurant;
 }
