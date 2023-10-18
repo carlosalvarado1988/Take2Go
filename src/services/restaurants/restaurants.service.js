@@ -1,5 +1,5 @@
-import { DB_SOURCE } from "@env";
 import camelize from "camelize";
+import { DB_SOURCE } from "@env";
 
 import { mocks, mockImages } from "./mock";
 import { getFunctionsHost, FIREBASE_DB } from "../utils/env";
@@ -15,18 +15,25 @@ const fetchMockRestaurants = (loc) =>
   });
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
+  console.log("## restaurantsRequest ~ location:", location);
+  console.log(
+    "## restaurantsRequest DB_SOURCE === FIREBASE_DB",
+    DB_SOURCE === FIREBASE_DB
+  );
   if (DB_SOURCE === FIREBASE_DB) {
-    const host = getFunctionsHost("placesnearby");
+    const host = getFunctionsHost("placesNearby");
     const searchUrl = `${host}?location=${location}`;
     console.log("restaurantsRequest ~ searchUrl:", searchUrl);
-    return fetch(searchUrl).then((res) => res.json());
+    return fetch(searchUrl).then(async (res) => {
+      const response = await res.json();
+      return response;
+    });
   } else {
     return fetchMockRestaurants(location);
   }
 };
 
 export const restaurantsTransform = ({ results = [] }) => {
-  console.log("restaurantsRequest ~ results:", results.length);
   return camelize(
     results.map((restaurant) => {
       const enhancedRestaurant = {
@@ -38,6 +45,7 @@ export const restaurantsTransform = ({ results = [] }) => {
         address: restaurant.vicinity,
       };
       if (DB_SOURCE !== FIREBASE_DB) {
+        // for local mocked data only
         enhancedRestaurant.photos = restaurant.photos.map(
           (p) => mockImages[Math.ceil(Math.random() * (mockImages.length - 1))]
         );

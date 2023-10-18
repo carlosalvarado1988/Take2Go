@@ -8,12 +8,15 @@ module.exports.geocodeRequest = (req, res, client) => {
     return res.json(locationMock);
   }
   // here we use the SDK to fetch from google api
+
+  const params = {
+    address: city,
+    key: process.env.MAPS_API_KEY_GCP,
+  };
+
   client
     .geocode({
-      params: {
-        address: city,
-        key: process.env.MAPS_API_KEY_GCP,
-      },
+      params,
       timeout: 1000,
     })
     .then((response) => {

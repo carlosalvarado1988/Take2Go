@@ -17,18 +17,21 @@ export const RestaurantContextProvider = ({ children }) => {
   const { location } = useContext(LocationContext);
 
   const fetchRestaurantsData = (loc) => {
+    const locString = loc.lat && loc.lng ? `${loc.lat},${loc.lng}` : undefined;
     setIsLoading(true);
     setRestaurants([]);
-    restaurantsRequest(`${loc.lat},${loc.lng}`)
+    restaurantsRequest(locString)
       .then(restaurantsTransform)
       .then((results) => {
         setIsLoading(false);
         setRestaurants(results);
       })
       .catch((err) => {
-        toast.show(err, {
-          type: "danger",
-        });
+        if (typeof err === "string") {
+          toast.show(err, {
+            type: "danger",
+          });
+        }
         setIsLoading(false);
         setError(err);
       });

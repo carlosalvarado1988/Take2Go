@@ -6,7 +6,7 @@ export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
   const toast = useToast();
-  const [location, setLocation] = useState([]);
+  const [location, setLocation] = useState({});
   const [keyword, setKeyword] = useState("San Francisco");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -29,9 +29,12 @@ export const LocationContextProvider = ({ children }) => {
         setLocation(result);
       })
       .catch((err) => {
-        toast.show(err, {
-          type: "danger",
-        });
+        console.log("err", err);
+        if (typeof err === "string") {
+          toast.show(err, {
+            type: "danger",
+          });
+        }
         setIsLoading(false);
         setError(err);
       });

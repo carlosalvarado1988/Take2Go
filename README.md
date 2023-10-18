@@ -101,6 +101,8 @@ Note each function has its own base url:
 
 ### RESTRICTING GCP and google functions to avoid unexpected bills.
 
+### [Firebase Usage](https://console.firebase.google.com/u/4/project/catalog-12a8d/usage)
+
 - Firebase is setup with EKOS [SV ACCOUNT](https://console.firebase.google.com/u/4/_gl=1*jgigb9*_ga*MTY1NDk2NzM4OC4xNjg1MTE2NTY3*_ga_CW55HF8NVT*MTY5NzQ3ODM5OS43OC4wLjE2OTc0NzgzOTkuNjAuMC4w)
 
 - go to GCP Platform, create a project: [Catalog-api](https://console.cloud.google.com/home/dashboard?authuser=4&project=catalog-functions-check)

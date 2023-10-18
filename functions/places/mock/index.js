@@ -24,6 +24,7 @@ const mockImages = [
 module.exports.addMockImage = (restaurant) => {
   const randomImage =
     mockImages[Math.ceil(Math.random() * (mockImages.length - 1))];
+  // photos key needed as ['url' ...] to display in the UI.
   restaurant.photos = [randomImage];
   return restaurant;
 };
