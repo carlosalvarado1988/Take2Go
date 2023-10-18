@@ -57,5 +57,9 @@ function getGooglePhotoFromPlaceApi(restaurant) {
 
   // check photo_reference exists to use liveUrl, if not, mock img
   restaurant.photos = [!photo_reference ? mockImgUrl : liveGoogleImgUrl];
+  console.log(
+    "## getGooglePhotoFromPlaceApi - restaurant.photos",
+    restaurant.photos
+  );
   return restaurant;
 }

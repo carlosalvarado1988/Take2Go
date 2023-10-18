@@ -19,6 +19,7 @@ export const locationRequest = (searchTerm) => {
   if (DB_SOURCE === FIREBASE_DB) {
     const host = getFunctionsHost("geocode");
     const searchUrl = `${host}?city=${searchTerm}`;
+    console.log("locationRequest ~ searchUrl:", searchUrl);
     return fetch(searchUrl).then((res) => res.json());
   } else {
     return fetchMockLocation(searchTerm);

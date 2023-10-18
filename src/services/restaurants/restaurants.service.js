@@ -15,12 +15,11 @@ const fetchMockRestaurants = (loc) =>
   });
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
-  console.log("## restaurantsRequest ~ location:", location);
-  console.log(
-    "## restaurantsRequest DB_SOURCE === FIREBASE_DB",
-    DB_SOURCE === FIREBASE_DB
-  );
   if (DB_SOURCE === FIREBASE_DB) {
+    console.log(
+      "## restaurantsRequest DB_SOURCE === FIREBASE_DB",
+      DB_SOURCE === FIREBASE_DB
+    );
     const host = getFunctionsHost("placesNearby");
     const searchUrl = `${host}?location=${location}`;
     console.log("restaurantsRequest ~ searchUrl:", searchUrl);
