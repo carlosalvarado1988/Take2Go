@@ -12,6 +12,7 @@ module.exports.placesRequest = (req, res, client) => {
     }
   }
 
+  console.log("### placesRequest using Google API geocode with Client");
   const params = {
     location,
     radius: 1500, // represents metters

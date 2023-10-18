@@ -4,11 +4,12 @@ const url = require("url");
 module.exports.geocodeRequest = (req, res, client) => {
   const { city, mock } = url.parse(req.url, true).query;
   if (mock) {
+    console.log("### geocodeRequest using mock");
     const locationMock = locationsMock[city?.toLocaleLowerCase()];
     return res.json(locationMock);
   }
   // here we use the SDK to fetch from google api
-
+  console.log("### geocodeRequest using Google API geocode with Client");
   const params = {
     address: city,
     key: process.env.MAPS_API_KEY_GCP,
