@@ -59,7 +59,7 @@ function getGooglePhotoFromPlaceApi(restaurant) {
   restaurant.photos = [!photo_reference ? mockImgUrl : liveGoogleImgUrl];
   console.log(
     "## getGooglePhotoFromPlaceApi - restaurant.photos",
-    restaurant.photos
+    restaurant?.photos[0]
   );
   return restaurant;
 }

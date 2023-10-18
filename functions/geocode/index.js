@@ -4,7 +4,7 @@ const url = require("url");
 module.exports.geocodeRequest = (req, res, client) => {
   const { city, mock } = url.parse(req.url, true).query;
   if (mock) {
-    console.log("### geocodeRequest using mock");
+    console.log("### geocodeRequest using mock!!");
     const locationMock = locationsMock[city?.toLocaleLowerCase()];
     return res.json(locationMock);
   }
@@ -24,6 +24,7 @@ module.exports.geocodeRequest = (req, res, client) => {
       return res.json(response.data);
     })
     .catch((err) => {
+      console.log("🚀 ~ file: index.js:27 ~ err:", err);
       res.status(400);
       return res.send(err.response.data.error_message);
     });
