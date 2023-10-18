@@ -1,6 +1,5 @@
 const url = require("url");
 const { mocks, addMockImage } = require("./mock");
-require("firebase-functions/logger/compat");
 
 module.exports.placesRequest = (req, res, client) => {
   const { location, mock } = url.parse(req.url, true).query;

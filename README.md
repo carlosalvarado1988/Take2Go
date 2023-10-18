@@ -54,6 +54,24 @@ Make sure to check for updates and fixes from firebase functions by running the 
 > npm install firebase-functions@latest firebase-admin@latest --save
 > (sudo) npm install -g firebase-tools
 
+## Deploying functions
+
+command: `npm run deploy`
+It seems to be caused by a missing/inaccessible file in the restore/rollback process.
+
+I was successfully removing the problem by simply:
+
+Deleting functions using the web firebase console.
+Deploying normally again >firebase deploy
+Review the following documentation of [gcloud functions deploy.](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--source)
+
+Additionally you could also run firebase deploy --only functions again and it deployed successfully.
+
+Also, I found two stackoverflow links that may help you with your issue.
+
+Firebase functions deployment not updating
+Firebase deploy not updating JS file
+
 ### .env file
 
 Use this as a template to configure your credentials

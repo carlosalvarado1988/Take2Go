@@ -1,6 +1,5 @@
 const { locations: locationsMock } = require("./geocode.mock");
 const url = require("url");
-require("firebase-functions/console.logger/compat");
 
 module.exports.geocodeRequest = (req, res, client) => {
   const { city, mock } = url.parse(req.url, true).query;
