@@ -11,6 +11,6 @@ console.log(
 );
 export const isDevelopment = process.env.NODE_ENV === "development";
 
-// export const getFunctionsHost = (func) =>
-//   isDevelopment ? localFunctionsHost(func) : liveFunctionsHost(func);
-export const getFunctionsHost = (func) => localFunctionsHost(func);
+export const getFunctionsHost = (func) =>
+  isDevelopment ? localFunctionsHost(func) : liveFunctionsHost(func);
+// export const getFunctionsHost = (func) => localFunctionsHost(func);

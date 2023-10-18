@@ -150,3 +150,18 @@ Note each function has its own base url:
   -
 
   ## Note changes in functions, need re-deploy to firebase functions
+
+# EXPO PUBLISH - DEPLOY TO LIVE
+
+go to the root of project, run:
+
+> expo publish
+
+how to revisit live version of expo app ?
+enter the expo app in the mobile or website
+you will see Projects listed
+![Expo Go](readme_files/exp-app-live-project.png)
+
+Users for testing: [Firebase Authentication](https://console.firebase.google.com/u/4/project/catalog-12a8d/authentication/users)
+
+eg. user+1@test.com -> user1test
