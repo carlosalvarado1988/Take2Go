@@ -11,7 +11,6 @@ import {
   getReactNativePersistence,
 } from "firebase/auth/react-native";
 import {
-  DB_SOURCE,
   FIREBASE_API_KEY,
   AUTH_DOMAIN,
   PROJECT_ID,
@@ -28,7 +27,6 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { FIREBASE_DB, isDevelopment } from "./src/services/utils/env";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -51,16 +49,6 @@ export default function App() {
 
   if (!oswaldLoaded && !latoLoaded) {
     return null;
-  }
-
-  console.log("## NODE_ENV:", process.env.NODE_ENV);
-  console.log("## DB_SOURCE:", DB_SOURCE);
-
-  if (DB_SOURCE === FIREBASE_DB) {
-    console.log("## isDevelopment:", isDevelopment);
-    if (!isDevelopment) {
-      console.log("## Google Functions in production could charge");
-    }
   }
 
   return (

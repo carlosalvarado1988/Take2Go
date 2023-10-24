@@ -1,4 +1,5 @@
 import { Platform } from "react-native";
+import { DB_SOURCE } from "@env";
 
 export const FIREBASE_DB = "FIREBASE_DB";
 export const liveFunctionsHost = (func) => {
@@ -10,11 +11,18 @@ export const localFunctionsHost = (func) => {
   return `http://127.0.0.1:5001/catalog-12a8d/us-central1/${func}`;
 };
 
+console.log("## DB_SOURCE:", DB_SOURCE);
 console.log("process.env.NODE_ENV", process.env.NODE_ENV);
 console.log(
   "process.env.NODE_ENV === development (isDevelopment)",
   process.env.NODE_ENV === "development"
 );
+
+if (DB_SOURCE === FIREBASE_DB) {
+  if (!isDevelopment) {
+    console.log("## Google Functions in production could charge");
+  }
+}
 
 export const isAndroid = Platform.OS === "android";
 export const isDevelopment = process.env.NODE_ENV === "development";
