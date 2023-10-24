@@ -197,3 +197,10 @@ you will see Projects listed
 Users for testing: [Firebase Authentication](https://console.firebase.google.com/u/4/project/catalog-12a8d/authentication/users)
 
 eg. user+1@test.com -> user1test
+
+# Setup payments with Stripe
+
+- you create an account with stripe, you can use test data during dev.
+- you create a new firebase function.
+- we use [stripe client](https://www.npmjs.com/package/stripe-client)
+-
