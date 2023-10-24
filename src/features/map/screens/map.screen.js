@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Marker, Callout } from "react-native-maps";
-
+import { isEmpty } from "lodash";
 import { Map } from "./map-screen.styles";
 import { Search } from "../components/search.component";
 import { MapCallout } from "../components/map-callout.component";
@@ -8,8 +8,7 @@ import { MapCallout } from "../components/map-callout.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 
-export const MapScreen = ({ navigation }) => {
-  const { location } = useContext(LocationContext);
+const SafeMapScreen = ({ navigation, location }) => {
   const { restaurants = [] } = useContext(RestaurantContext);
 
   const [latDelta, setLatDelta] = useState(0);
@@ -57,4 +56,22 @@ export const MapScreen = ({ navigation }) => {
       </Map>
     </>
   );
+};
+
+// Implement HOC to prevent error when location data fails to come from GCP
+export const MapScreen = ({ navigation }) => {
+  const { location } = useContext(LocationContext);
+  if (isEmpty(location)) {
+    return (
+      <Map
+        region={{
+          latitude: 100,
+          longitude: 0,
+          latitudeDelta: 0,
+          longitudeDelta: 0.03, // determined zoom
+        }}
+      />
+    );
+  }
+  return <SafeMapScreen navigation={navigation} location={location} />;
 };
