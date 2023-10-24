@@ -1,5 +1,9 @@
 # Running the local environment
 
+### Guideline
+
+[Udemy course](https://www.udemy.com/course/complete-react-native-mobile-development-zero-to-mastery-with-hooks/learn/lecture/24669058?components=add_to_cart%2Cavailable_coupons%2Cbase_purchase_section%2Cbuy_button%2Cbuy_for_team%2Ccacheable_buy_button%2Ccacheable_deal_badge%2Ccacheable_discount_expiration%2Ccacheable_price_text%2Ccacheable_purchase_text%2Ccurated_for_ufb_notice_context%2Ccurriculum_context%2Cdeal_badge%2Cdiscount_expiration%2Cgift_this_course%2Cincentives%2Cinstructor_links%2Clifetime_access_context%2Cmoney_back_guarantee%2Cprice_text%2Cpurchase_tabs_context%2Cpurchase%2Crecommendation%2Credeem_coupon%2Csidebar_container%2Cpurchase_body_container#overview)
+
 ### This is an Expo Project
 
 > Why do I have a folder named ".expo" in my project?
@@ -47,30 +51,24 @@ In order to run firebase functions from the local enviroment, you need to do the
 
 4. you will notice a new server instance starts running probably in the url: http://localhost:4000/functions, visit the page and check for logs and debugging.
 
-### Kepp Firebase functions up to date
+### Keep Firebase functions up to date
 
 Make sure to check for updates and fixes from firebase functions by running the following commands:
 
 > npm install firebase-functions@latest firebase-admin@latest --save
 > (sudo) npm install -g firebase-tools
 
-## Deploying functions
+## Managing fuctions.
 
-command: `npm run deploy`
-It seems to be caused by a missing/inaccessible file in the restore/rollback process.
+### Deploying functions
 
-I was successfully removing the problem by simply:
+- [docs](https://firebase.google.com/docs/functions/manage-functions?gen=2nd)
 
-Deleting functions using the web firebase console.
-Deploying normally again >firebase deploy
-Review the following documentation of [gcloud functions deploy.](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--source)
+- command: `npm run deploy`
 
-Additionally you could also run firebase deploy --only functions again and it deployed successfully.
+### Delete functions from firebase
 
-Also, I found two stackoverflow links that may help you with your issue.
-
-Firebase functions deployment not updating
-Firebase deploy not updating JS file
+- using the CLI: `firebase functions:delete myFunction`
 
 ### .env file
 
@@ -87,7 +85,7 @@ Use this as a template to configure your credentials
 
 ## Deploying functions to firebase
 
-- use yarn deploy
+- use `npm run deploy`
 - as they need billing info, they went to Catalog instance directly/
 - check the [functions_url](https://console.firebase.google.com/u/4/project/catalog-12a8d/functions/list)
 
@@ -97,14 +95,9 @@ Note each function has its own base url:
 
 ## toggle which firebase api - local vs live (paid)
 
-- services/utils/env is checking for NODE_ENV to decide what url to use.
-  local functions running in development or google api funcitons in production
-
-  You can pass NODE_ENV value as convinient
-
-  > npm run ios-dev
-
-  this will ensure, we run local serve functions that connect with Google API
+- `services/utils/env` is checking for NODE_ENV to decide what url to use, local functions vs live functions.
+- npm run ios-prod vs ios-dev is adding NODE_ENV value, sometime sthe cache does not help, then go to env.js file to hardcode the resolution of the function.
+- note: local functions running in development or google api funcitons in production
 
 ## Services
 
@@ -112,8 +105,6 @@ Note each function has its own base url:
 - the service is deciding to use mocked data or firebase data.
 - firebase can use free account for users data and simple lambda functions
   - firebase pay-as-you-go instance is needed to integrate google maps api.
-
-## last video 233
 
 # Configuring Google Firebase functions to integrate with Google Maps
 
@@ -164,10 +155,33 @@ Note each function has its own base url:
 
   ### Implementing client.placesNearby from googple api
 
-  - taking a look to the module in the library [github](https://github.com/googlemaps/google-maps-services-js/blob/master/src/places/placesnearby.ts)
-  -
+  - taking a look to the module in the library [github](https://console.firebase.google.com/u/4/)
+  - this local implementation is using a photos key as an array to get an image, you had to implement a function to parse the data, build the image url from the original reference.
 
-  ## Note changes in functions, need re-deploy to firebase functions
+  ## Cloud Run configuration needed to allow access.
+
+  - to allow invocations to the cloud, firebase function, you add allUsers access with Cloud Run Invoker role.
+  - ![Cloud Run](readme_files/allUsersAccess.png)
+  - TODO: implement secure access to IOS app.
+
+## Functions links
+
+- ## Note changes in functions, need re-deploy to firebase functions
+
+# Clear cache to run the app
+
+- sometimes the app gets polluded and clear the cache helps a lot:
+- run: `yarn cache clean` and `npx expo start --clear`
+
+### Troubleshooting functions
+
+When there are errors to deploy the functions, its better to remove them and deploy entirely again.
+last issue found was with Yarn in CGP environment, throwing an error about plugin not found.
+
+[the solution was to remove yarn.lock and try again](https://stackoverflow.com/questions/76427975/firebase-functions-deployment-error-cant-resolve-command-plugin-not-found)
+
+- when recreating funcitons, you need to generate, relate the api key again for access.
+-
 
 # EXPO PUBLISH - DEPLOY TO LIVE
 

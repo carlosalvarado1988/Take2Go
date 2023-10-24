@@ -1,10 +1,24 @@
 const url = require("url");
 const { mocks, addMockImage } = require("./mock");
+const { log } = require("firebase-functions/logger");
+
+const parseErrorMsg = (err, func) => {
+  let msg = `Error in ${func}`;
+  if (typeof err === "string") {
+    msg += ` ${err}`;
+  }
+  if (typeof err === "object") {
+    msg += ` ${err.message}`;
+  }
+  return msg;
+};
 
 module.exports.placesRequest = (req, res, client) => {
   const { location, mock } = url.parse(req.url, true).query;
-  if (mock) {
+  if (mock === "true") {
     console.log("## geocodeRequest has used locationMock");
+    log("## geocodeRequest has used locationMock");
+
     const data = mocks[location];
     if (data) {
       data.results = data.results.map(addMockImage);
@@ -12,7 +26,8 @@ module.exports.placesRequest = (req, res, client) => {
     }
   }
 
-  console.log("### placesRequest using Google API geocode with Client");
+  log("### placesRequest using Google API geocode with Client");
+
   const params = {
     location,
     radius: 1500, // represents metters
@@ -26,14 +41,18 @@ module.exports.placesRequest = (req, res, client) => {
       timeout: 1000,
     })
     .then((response) => {
+      console.log("### placesNearby returned response in then");
+      log("### placesNearby returned response in then");
+
       // adding images as needed for UI
-      response.data.results = response.data.results.map(
+      response.data.results = response?.data.results.map(
         getGooglePhotoFromPlaceApi
       );
-      return res.json(response.data);
+      return res.json(response?.data);
     })
     .catch((err) => {
-      console.log("## client GOOGLE API err", err);
+      const errMsg = parseErrorMsg(err, "placesNearby");
+      log(errMsg);
       res.status(400);
       return res.send(err.response.data.error_message);
     });
@@ -57,9 +76,9 @@ function getGooglePhotoFromPlaceApi(restaurant) {
 
   // check photo_reference exists to use liveUrl, if not, mock img
   restaurant.photos = [!photo_reference ? mockImgUrl : liveGoogleImgUrl];
-  console.log(
-    "## getGooglePhotoFromPlaceApi - restaurant.photos",
-    restaurant?.photos[0]
-  );
+  // const logMsg = `## getGooglePhotoFromPlaceApi - restaurant.photos ${restaurant?.photos[0]}`;
+  // console.log(logMsg);
+  // log(logMsg);
+
   return restaurant;
 }

@@ -3704,6 +3704,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prop-types@npm:*":
+  version: 15.7.9
+  resolution: "@types/prop-types@npm:15.7.9"
+  checksum: c7591d3ff7593e243908a07e1d3e2bb6e8879008af5800d8378115a90d0fdf669a1cae72a6d7f69e59c4fa7bb4c8ed61f6ebc1c520fe110c6f2b03ac02414072
+  languageName: node
+  linkType: hard
+
 "@types/qs@npm:*":
   version: 6.9.8
   resolution: "@types/qs@npm:6.9.8"
@@ -3718,6 +3725,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react@npm:~18.0.27":
+  version: 18.0.38
+  resolution: "@types/react@npm:18.0.38"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 34481c79f4f7ea2aefbaa45281319dc183200230d932d968463eba1643bd3635073d0a17c5c613150a69e36ca18b811ecffafea6384fa3dff3b5203866339d69
+  languageName: node
+  linkType: hard
+
 "@types/rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "@types/rimraf@npm:3.0.2"
@@ -3725,6 +3743,13 @@ __metadata:
     "@types/glob": "*"
     "@types/node": "*"
   checksum: b47fa302f46434cba704d20465861ad250df79467d3d289f9d6490d3aeeb41e8cb32dd80bd1a8fd833d1e185ac719fbf9be12e05ad9ce9be094d8ee8f1405347
+  languageName: node
+  linkType: hard
+
+"@types/scheduler@npm:*":
+  version: 0.16.5
+  resolution: "@types/scheduler@npm:0.16.5"
+  checksum: 5aae67331bb7877edc65f77f205fb03c3808d9e51c186afe26945ce69f4072886629580a751e9ce8573e4a7538d0dfa1e4ce388c7c451fa689a4c592fdf1ea45
   languageName: node
   linkType: hard
 
@@ -4887,6 +4912,7 @@ __metadata:
     "@react-navigation/bottom-tabs": ^6.5.7
     "@react-navigation/native": ^6.1.6
     "@react-navigation/stack": ^6.3.16
+    "@types/react": ~18.0.27
     camelize: ^1.0.1
     eslint: ^8.41.0
     eslint-plugin-prettier: ^4.2.1
@@ -4904,7 +4930,7 @@ __metadata:
     postcss-loader: ^7.3.0
     prettier: ^2.8.8
     react: 18.2.0
-    react-native: 0.71.13
+    react-native: 0.71.14
     react-native-dotenv: ^3.4.9
     react-native-gesture-handler: 2.9.0
     react-native-maps: 1.3.2
@@ -5460,7 +5486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.1.2":
+"csstype@npm:^3.0.2, csstype@npm:^3.1.2":
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: e1a52e6c25c1314d6beef5168da704ab29c5186b877c07d822bd0806717d9a265e8493a2e35ca7e68d0f5d472d43fac1cdce70fd79fd0853dff81f3028d857b5
@@ -11069,7 +11095,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-codegen@npm:^0.71.5":
+"react-native-codegen@npm:^0.71.6":
   version: 0.71.6
   resolution: "react-native-codegen@npm:0.71.6"
   dependencies:
@@ -11217,9 +11243,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.71.13":
-  version: 0.71.13
-  resolution: "react-native@npm:0.71.13"
+"react-native@npm:0.71.14":
+  version: 0.71.14
+  resolution: "react-native@npm:0.71.14"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.4
@@ -11246,7 +11272,7 @@ __metadata:
     pretty-format: ^26.5.2
     promise: ^8.3.0
     react-devtools-core: ^4.26.1
-    react-native-codegen: ^0.71.5
+    react-native-codegen: ^0.71.6
     react-native-gradle-plugin: ^0.71.19
     react-refresh: ^0.4.0
     react-shallow-renderer: ^16.15.0
@@ -11260,7 +11286,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native: cli.js
-  checksum: c895895b88af8a9268ea0d919d41637cabd5450b8397f4e2609095e09925f583471c27b722e78cb583f0e1fdc27f0db09610a95b4bba0bf817081132c695006d
+  checksum: 065d7a4d475ce484cd8c990775e8d410e96f0ec836c93cab71432bc96e2fac4d2f88e34e15c25d722103b3d501a836c4866855e499f60dd66f32aab62e5ed218
   languageName: node
   linkType: hard
 

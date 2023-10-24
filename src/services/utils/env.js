@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 export const FIREBASE_DB = "FIREBASE_DB";
 export const liveFunctionsHost = (func) => {
   console.log("## We use Live Firebase functions");
@@ -14,8 +16,15 @@ console.log(
   process.env.NODE_ENV === "development"
 );
 
+export const isAndroid = Platform.OS === "android";
 export const isDevelopment = process.env.NODE_ENV === "development";
+export const isMock = true;
 
 export const getFunctionsHost = (func) =>
-  !isDevelopment ? liveFunctionsHost(func) : localFunctionsHost(func);
+  !isDevelopment || isAndroid
+    ? liveFunctionsHost(func)
+    : localFunctionsHost(func);
+
+// DEBUG PURPOSES IN LIVE CGP FUNCIONS
+// export const getFunctionsHost = (func) => liveFunctionsHost(func);
 // export const getFunctionsHost = (func) => localFunctionsHost(func);

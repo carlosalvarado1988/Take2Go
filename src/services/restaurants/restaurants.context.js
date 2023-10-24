@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
 import { useToast } from "react-native-toast-notifications";
-
+import { parseErrorMsg } from "../utils/helpers";
 import {
   restaurantsRequest,
   restaurantsTransform,
@@ -27,11 +27,10 @@ export const RestaurantContextProvider = ({ children }) => {
         setRestaurants(results);
       })
       .catch((err) => {
-        if (typeof err === "string") {
-          toast.show(err, {
-            type: "danger",
-          });
-        }
+        const msg = parseErrorMsg(err, "restaurantsRequest");
+        toast.show(msg, {
+          type: "danger",
+        });
         setIsLoading(false);
         setError(err);
       });
