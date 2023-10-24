@@ -1,12 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
-
+import { useToast } from "react-native-toast-notifications";
 import { locationRequest, locationTransform } from "./location.service";
+import { parseErrorMsg } from "../utils/helpers";
 
 export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
-  const [location, setLocation] = useState([]);
-  const [keyword, setKeyword] = useState("San Francisco");
+  const toast = useToast();
+  const [location, setLocation] = useState({});
+  const [keyword, setKeyword] = useState("Toronto");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -20,6 +22,7 @@ export const LocationContextProvider = ({ children }) => {
       // don't do the search
       return;
     }
+
     locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       .then((result) => {
@@ -27,9 +30,15 @@ export const LocationContextProvider = ({ children }) => {
         setLocation(result);
       })
       .catch((err) => {
+        console.log("err in locationRequest", err);
+        const msg = parseErrorMsg(err, "locationRequest");
+        toast.show(msg, {
+          type: "danger",
+        });
         setIsLoading(false);
         setError(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   return (

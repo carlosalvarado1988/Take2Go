@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
-
+import { useToast } from "react-native-toast-notifications";
+import { parseErrorMsg } from "../utils/helpers";
 import {
   restaurantsRequest,
   restaurantsTransform,
@@ -12,30 +13,34 @@ export const RestaurantContextProvider = ({ children }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const toast = useToast();
   const { location } = useContext(LocationContext);
 
-  const fetchRestaurantsMockData = (loc) => {
+  const fetchRestaurantsData = (loc) => {
+    const locString = loc.lat && loc.lng ? `${loc.lat},${loc.lng}` : undefined;
     setIsLoading(true);
     setRestaurants([]);
-    setTimeout(() => {
-      restaurantsRequest(`${loc.lat},${loc.lng}`)
-        .then(restaurantsTransform)
-        .then((results) => {
-          setIsLoading(false);
-          setRestaurants(results);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
+    restaurantsRequest(locString)
+      .then(restaurantsTransform)
+      .then((results) => {
+        setIsLoading(false);
+        setRestaurants(results);
+      })
+      .catch((err) => {
+        const msg = parseErrorMsg(err, "restaurantsRequest");
+        toast.show(msg, {
+          type: "danger",
         });
-    }, 2000);
+        setIsLoading(false);
+        setError(err);
+      });
   };
 
   useEffect(() => {
     if (location) {
-      fetchRestaurantsMockData(location);
+      fetchRestaurantsData(location);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (

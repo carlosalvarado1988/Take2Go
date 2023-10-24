@@ -1,15 +1,29 @@
 import camelize from "camelize";
+import { DB_SOURCE } from "@env";
 
 import { locations } from "./location.mock";
+import { getFunctionsHost, FIREBASE_DB, isMock } from "../utils/env";
+
+const fetchMockLocation = (term) =>
+  new Promise((resolve, reject) => {
+    console.log("## fetchMockLocation");
+    const locationMock = locations[term];
+
+    if (!locationMock) {
+      return reject("not found");
+    }
+    return resolve(locationMock);
+  });
 
 export const locationRequest = (searchTerm) => {
-  return new Promise((resolve, reject) => {
-    const locationMock = locations[searchTerm];
-    if (!locationMock) {
-      reject("not found");
-    }
-    resolve(locationMock);
-  });
+  if (DB_SOURCE === FIREBASE_DB) {
+    const host = getFunctionsHost("geocode");
+    const searchUrl = `${host}?city=${searchTerm}&mock=${isMock}`;
+    console.log("locationRequest ~ searchUrl:", searchUrl);
+    return fetch(searchUrl).then((res) => res.json());
+  } else {
+    return fetchMockLocation(searchTerm);
+  }
 };
 
 export const locationTransform = (result) => {
