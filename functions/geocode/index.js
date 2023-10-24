@@ -15,15 +15,14 @@ const parseErrorMsg = (err, func) => {
 
 module.exports.geocodeRequest = (req, res, client) => {
   const { city, mock } = url.parse(req.url, true).query;
+  log("## mock value:", mock);
   if (mock === "true") {
-    console.log("### geocodeRequest using mock!!");
-    log("### geocodeRequest using mock!!");
+    log("### geocodeRequest using locationsMock");
 
     const locationMock = locationsMock[city?.toLocaleLowerCase()];
     return res.json(locationMock);
   }
   // here we use the SDK to fetch from google api
-  console.log("### geocodeRequest using Google API geocode with Client");
   log("### geocodeRequest using Google API geocode with Client");
 
   const params = {
