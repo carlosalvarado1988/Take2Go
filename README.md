@@ -203,4 +203,6 @@ eg. user+1@test.com -> user1test
 - you create an account with stripe, you can use test data during dev.
 - you create a new firebase function.
 - we use [stripe client](https://www.npmjs.com/package/stripe-client)
+- added [react-native-credit-card-input](https://www.npmjs.com/package/react-native-credit-card-input)
+- you use LiteCreditCardInput to validate and caputer credit card info from user
 -

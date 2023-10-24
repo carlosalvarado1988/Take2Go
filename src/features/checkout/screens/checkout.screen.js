@@ -1,6 +1,11 @@
 import React from "react";
-import { Text } from "react-native-paper";
+import { CreditCardInput } from "../components/credit-card.component";
+import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 
 export const CheckoutScreen = ({ navigation }) => {
-  return <Text>Checkout</Text>;
+  return (
+    <SafeAreaViewContainer>
+      <CreditCardInput />
+    </SafeAreaViewContainer>
+  );
 };

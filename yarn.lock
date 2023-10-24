@@ -3356,6 +3356,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/normalize-colors@npm:<0.73.0":
+  version: 0.72.0
+  resolution: "@react-native/normalize-colors@npm:0.72.0"
+  checksum: c8ec577663394a3390eb34c3cd531350521172bcfad7de309ab111e5f9e3d27c966d4a4387f00972302107be3d8cad584c5794ccfa30939aecc56162e4ddbe25
+  languageName: node
+  linkType: hard
+
 "@react-native/polyfills@npm:2.0.0":
   version: 2.0.0
   resolution: "@react-native/polyfills@npm:2.0.0"
@@ -4914,6 +4921,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"card-validator@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "card-validator@npm:3.0.1"
+  dependencies:
+    credit-card-type: ^5.0.0
+    lodash: 3.10.1
+  checksum: bcf9259183e78b2c1a4376e22ec95ecb3e827366723a513c9d842a342b6026a387a1cbcd373bc72edb8222768a1aa5a00787213d55c6bb6b5ad7842fba04b657
+  languageName: node
+  linkType: hard
+
 "catalog@workspace:.":
   version: 0.0.0-use.local
   resolution: "catalog@workspace:."
@@ -4946,6 +4963,7 @@ __metadata:
     prettier: ^2.8.8
     react: 18.2.0
     react-native: 0.71.14
+    react-native-credit-card-input: ^0.4.1
     react-native-dotenv: ^3.4.9
     react-native-gesture-handler: 2.9.0
     react-native-maps: 1.3.2
@@ -5400,6 +5418,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"credit-card-type@npm:^5.0.0":
+  version: 5.0.4
+  resolution: "credit-card-type@npm:5.0.4"
+  checksum: 8a0e815135bd619d88bc10da3e0f6598a4f0cd79f9c3a3e462c60b7edd2e4a8c44058591c26d462109aee1599549e0d8fe4cdf0f0882c8ec7554f8be0fce9b06
+  languageName: node
+  linkType: hard
+
 "cross-fetch@npm:^3.1.5":
   version: 3.1.8
   resolution: "cross-fetch@npm:3.1.8"
@@ -5695,6 +5720,17 @@ __metadata:
     invariant: ^2.2.4
     prop-types: ^15.8.1
   checksum: cc6b836cafd4b915393787866a6be07b5b4d59a1d13ea67eeecb99015ea9ff830cc4888a3c87be45847705689ecf9de92f55b0134411746e541244cf8a9b4116
+  languageName: node
+  linkType: hard
+
+"deprecated-react-native-prop-types@npm:^4.0.0":
+  version: 4.2.3
+  resolution: "deprecated-react-native-prop-types@npm:4.2.3"
+  dependencies:
+    "@react-native/normalize-colors": <0.73.0
+    invariant: ^2.2.4
+    prop-types: ^15.8.1
+  checksum: 294752f9f15733b66473022d8258a14aac850e4a3db7e802ef189a09871236f5a110f8fe588468ae1df92f24641ae29de05943074dc54da02a5e4262935f913d
   languageName: node
   linkType: hard
 
@@ -8946,10 +8982,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.compact@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "lodash.compact@npm:3.0.1"
+  checksum: 75039eddfa5ef2ea0da1fc3d36515e92227241f94258b3dcf771196e741c878698ce5b79c0cb7fe758841c9dfd0e6fa222888985aadc0384fd79bbc9680dd829
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: a3f527d22c548f43ae31c861ada88b2637eb48ac6aa3eb56e82d44917971b8aa96fbb37aa60efea674dc4ee8c42074f90f7b1f772e9db375435f6c83a19b3bc6
+  languageName: node
+  linkType: hard
+
+"lodash.every@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "lodash.every@npm:4.6.0"
+  checksum: bfb96426ccdf05ef230339ba57400c59a60a16ce6a4f41f50eb89e7ba612686900fcaf1c3a28f907a8ba993b96da681303bd622cdcadfc7d60e1f0f098384aa4
   languageName: node
   linkType: hard
 
@@ -9009,10 +9059,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.pick@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "lodash.pick@npm:4.4.0"
+  checksum: 2c36cab7da6b999a20bd3373b40e31a3ef81fa264f34a6979c852c5bc8ac039379686b27380f0cb8e3781610844fafec6949c6fbbebc059c98f8fa8570e3675f
+  languageName: node
+  linkType: hard
+
 "lodash.throttle@npm:^4.1.1":
   version: 4.1.1
   resolution: "lodash.throttle@npm:4.1.1"
   checksum: 129c0a28cee48b348aef146f638ef8a8b197944d4e9ec26c1890c19d9bf5a5690fe11b655c77a4551268819b32d27f4206343e30c78961f60b561b8608c8c805
+  languageName: node
+  linkType: hard
+
+"lodash.values@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "lodash.values@npm:4.3.0"
+  checksum: 857e122ddf6edb50137887f0b834d471f96d66692ebb5de8b048ed277c8a3dd1bc8f85d82cf31b0f5c6dbc5b72c036a591205f76eec86bb11818a1a6f7e5a28c
+  languageName: node
+  linkType: hard
+
+"lodash@npm:3.10.1":
+  version: 3.10.1
+  resolution: "lodash@npm:3.10.1"
+  checksum: 53065d3712a2fd90b55690c5af19f9625a5bbb2b7876ff76d782ee1dc22618fd4dff191d44a8e165a17b5b81a851c3e884d3b5b25e314422fbe24bb299542685
   languageName: node
   linkType: hard
 
@@ -10851,7 +10922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -11133,6 +11204,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-credit-card-input@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "react-native-credit-card-input@npm:0.4.1"
+  dependencies:
+    card-validator: ^3.0.0
+    lodash.compact: ^3.0.1
+    lodash.every: ^4.6.0
+    lodash.pick: ^4.4.0
+    lodash.values: ^4.3.0
+    prop-types: ^15.6.0
+    react-native-flip-card: ^3.4.1
+  checksum: b12712ff5a12591bc83015fb0876fcec5fc5c21d109b5038bbf7e67bc27dcc655f1a47a1c0b6fd9794c09a29e4a8de8990b552043284f2c39f08f6f3a34589c6
+  languageName: node
+  linkType: hard
+
 "react-native-dotenv@npm:^3.4.9":
   version: 3.4.9
   resolution: "react-native-dotenv@npm:3.4.9"
@@ -11141,6 +11227,16 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.20.6
   checksum: 9727c6a08e1b3e53b31d620ac1e9daedd899b61c0fd5413fb4593a209c0bf73e245506fc02bdb0d3caa4abf4f4145fa8499afff8e48e22bcf317cd90dbe18b87
+  languageName: node
+  linkType: hard
+
+"react-native-flip-card@npm:^3.4.1":
+  version: 3.5.7
+  resolution: "react-native-flip-card@npm:3.5.7"
+  dependencies:
+    deprecated-react-native-prop-types: ^4.0.0
+    prop-types: ^15.8.1
+  checksum: 815126a104f7c0e6eb5fc6504ec627f43e96d411672bedc4ebf2a562a1f782dd55964b6c3abdb3769c4e5c035cbf2940e0c011e5a6d21c53fa6505e8c6952003
   languageName: node
   linkType: hard
 
