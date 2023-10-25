@@ -94,6 +94,7 @@ export const BusinessDetailsScreen = ({ navigation, route }) => {
       >
         Order Special Only $11.99
       </OrderButton>
+      <Spacer position="top" size="xxl" />
     </SafeAreaViewContainer>
   );
 };
