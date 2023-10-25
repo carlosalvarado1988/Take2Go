@@ -15,12 +15,14 @@ const fetchMockLocation = (term) =>
     return resolve(locationMock);
   });
 
-export const locationRequest = (searchTerm) => {
+export const locationRequest = async (searchTerm) => {
   if (DB_SOURCE === FIREBASE_DB) {
     const host = getFunctionsHost("geocode");
     const searchUrl = `${host}?city=${searchTerm}&mock=${isMock}`;
     console.log("locationRequest ~ searchUrl:", searchUrl);
-    return fetch(searchUrl).then((res) => res.json());
+    return fetch(searchUrl)
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
   } else {
     return fetchMockLocation(searchTerm);
   }

@@ -205,4 +205,9 @@ eg. user+1@test.com -> user1test
 - we use [stripe client](https://www.npmjs.com/package/stripe-client)
 - added [react-native-credit-card-input](https://www.npmjs.com/package/react-native-credit-card-input)
 - you use LiteCreditCardInput to validate and caputer credit card info from user
+
+### Setup firebase function for Stripe payment
+
+- you create a new function payRequest, with the stripe client
+- added pay function locally at `http://127.0.0.1:5001/catalog-12a8d/us-central1/pay`
 -
