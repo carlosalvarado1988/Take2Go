@@ -35,22 +35,29 @@ export const CheckoutScreen = ({ navigation }) => {
         toast.show(msg, {
           type: "danger",
         });
+        navigation.navigate("CheckoutError", {
+          error: "Please fill in a valid credit card",
+        });
         return;
       }
       setIsLoading(true);
       await payRequest(card.id, total, name);
       setIsLoading(false);
       clearCart();
+      navigation.navigate("CheckoutSuccess");
     } catch (error) {
       setIsLoading(false);
       const msg = parseErrorMsg(error, "payRequest");
       toast.show(msg, {
         type: "danger",
       });
+      navigation.navigate("CheckoutError", {
+        error,
+      });
     }
   };
 
-  if (!cart.length || !restaurant) {
+  if (!cart?.length || !restaurant) {
     return (
       <SafeAreaViewContainer>
         <CartIconContainer>

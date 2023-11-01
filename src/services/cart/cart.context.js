@@ -1,19 +1,55 @@
-import React, { createContext, useState, useEffect } from "react";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// import { AuthenticationContext } from "../authentication/authentication.context";
+import { AuthenticationContext } from "../authentication/authentication.context";
 
 export const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
-  //   const { user } = useContext(AuthenticationContext);
+  const { user } = useContext(AuthenticationContext);
   const [cart, setCart] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
-
   const [total, setTotal] = useState(0);
 
+  const saveCart = async (currentRestaurant, currentCart, uid) => {
+    try {
+      const jsonValue = JSON.stringify({
+        restaurant: currentRestaurant,
+        cart: currentCart,
+      });
+      await AsyncStorage.setItem(`@cart-${uid}`, jsonValue);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadCart = async (uid) => {
+    try {
+      const value = await AsyncStorage.getItem(`@cart-${uid}`);
+      if (value) {
+        const { restaurant: rst, cart: crt } = JSON.parse(value);
+        setRestaurant(rst);
+        setCart(crt);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    if (!cart.length) {
+    if (user && user.uid) {
+      loadCart(user.uid);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user && user.uid && cart.length > 0) {
+      saveCart(restaurant, cart, user.uid);
+    }
+  }, [restaurant, cart, user]);
+
+  useEffect(() => {
+    if (!cart?.length) {
       setTotal(0);
       return;
     }
