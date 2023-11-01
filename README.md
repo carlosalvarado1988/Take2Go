@@ -211,3 +211,7 @@ eg. user+1@test.com -> user1test
 - you create a new function payRequest, with the stripe client
 - added pay function locally at `http://127.0.0.1:5001/catalog-12a8d/us-central1/pay`
 - [testing docs](https://stripe.com/docs/testing)
+
+# adding push notifications
+
+- follow docs: https://docs.expo.dev/push-notifications/push-notifications-setup/
