@@ -15,9 +15,9 @@ const parseErrorMsg = (err, func) => {
 
 module.exports.placesRequest = (req, res, client) => {
   const { location, mock } = url.parse(req.url, true).query;
+  log("## mock value:", mock);
   if (mock === "true") {
-    console.log("## geocodeRequest has used locationMock");
-    log("## geocodeRequest has used locationMock");
+    log("## placesRequest using placesMock");
 
     const data = mocks[location];
     if (data) {
@@ -41,7 +41,6 @@ module.exports.placesRequest = (req, res, client) => {
       timeout: 1000,
     })
     .then((response) => {
-      console.log("### placesNearby returned response in then");
       log("### placesNearby returned response in then");
 
       // adding images as needed for UI

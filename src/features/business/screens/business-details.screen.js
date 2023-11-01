@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { List } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 
 import { BusinessInfoCard } from "../components/businessInfoCard.component";
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { OrderButton } from "../../business/components/businessList.styles";
+import { CartContext } from "../../../services/cart/cart.context";
 
-export const BusinessDetailsScreen = ({ route }) => {
+export const BusinessDetailsScreen = ({ navigation, route }) => {
   const { business } = route.params;
-
+  const { addToCart } = useContext(CartContext);
   const [breakfastListExpanded, setBreakfastListExpanded] = useState(false);
   const [lunchListExpanded, setLunchListExpanded] = useState(false);
   const [dinnerListExpanded, setDinnerListExpanded] = useState(false);
@@ -74,6 +77,24 @@ export const BusinessDetailsScreen = ({ route }) => {
           <List.Item title="Fanta" />
         </List.Accordion>
       </ScrollView>
+      <Spacer position="bottom" size="large" />
+      <OrderButton
+        icon="cash"
+        mode="contained"
+        onPress={() => {
+          addToCart(
+            {
+              item: "special",
+              price: 1199,
+            },
+            business
+          );
+          navigation.navigate("Checkout");
+        }}
+      >
+        Order Special Only $11.99
+      </OrderButton>
+      <Spacer position="top" size="xxl" />
     </SafeAreaViewContainer>
   );
 };

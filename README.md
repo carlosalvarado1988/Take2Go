@@ -197,3 +197,17 @@ you will see Projects listed
 Users for testing: [Firebase Authentication](https://console.firebase.google.com/u/4/project/catalog-12a8d/authentication/users)
 
 eg. user+1@test.com -> user1test
+
+# Setup payments with Stripe
+
+- you create an account with stripe, you can use test data during dev.
+- you create a new firebase function.
+- we use [stripe client](https://www.npmjs.com/package/stripe-client)
+- added [react-native-credit-card-input](https://www.npmjs.com/package/react-native-credit-card-input)
+- you use LiteCreditCardInput to validate and caputer credit card info from user
+
+### Setup firebase function for Stripe payment
+
+- you create a new function payRequest, with the stripe client
+- added pay function locally at `http://127.0.0.1:5001/catalog-12a8d/us-central1/pay`
+- [testing docs](https://stripe.com/docs/testing)
