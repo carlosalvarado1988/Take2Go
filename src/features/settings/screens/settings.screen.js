@@ -4,14 +4,16 @@ import { TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
 import { AvatarContainer, ListItem } from "./settings.styles";
 import { SafeAreaViewContainer } from "../../../components/utilities/safe-area.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { colors } from "../../../infrastructure/theme/colors";
-import { Spacer } from "../../../components/spacer/spacer.component";
-import { Text } from "../../../components/typography/text.component";
+import { useSendPushNotification } from "../../../services/notifications/usePushNotification";
 
 export function SettingsScreen({ navigation }) {
+  const [sendPushNotification] = useSendPushNotification();
   const { user, onLogout } = useContext(AuthenticationContext);
   const [userPhotoUri, setUserPhotoUri] = useState(null);
 
@@ -61,6 +63,15 @@ export function SettingsScreen({ navigation }) {
           onPress={() => {
             navigation.navigate("Favorites");
           }}
+        />
+
+        <ListItem
+          title="Send notification"
+          // eslint-disable-next-line react/no-unstable-nested-components
+          left={(props) => (
+            <List.Icon {...props} color="black" icon="notification" />
+          )}
+          onPress={sendPushNotification}
         />
 
         <ListItem

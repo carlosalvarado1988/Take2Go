@@ -2,7 +2,7 @@ import { Platform } from "react-native";
 import { DB_SOURCE } from "@env";
 
 // export const isDevelopment = process.env.NODE_ENV === "development";
-export const isDevelopment = true;
+export const isDevelopment = false;
 export const isMock = true;
 
 export const FIREBASE_DB = "FIREBASE_DB";

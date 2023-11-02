@@ -211,3 +211,18 @@ eg. user+1@test.com -> user1test
 - you create a new function payRequest, with the stripe client
 - added pay function locally at `http://127.0.0.1:5001/catalog-12a8d/us-central1/pay`
 - [testing docs](https://stripe.com/docs/testing)
+
+# adding push notifications
+
+- follow docs: https://docs.expo.dev/push-notifications/push-notifications-setup/
+
+# Optimize prod images
+
+- install `npm i -g sharp-cli`
+- run: `npx expo-optimize`
+
+- add vscode extension VS `import Cost` to see extension files
+  Try this:
+  `import lodash from 'lodash'` ===> 71.1K
+  `import { uniqueId } from 'lodash'` ===> 71.1K
+  `import uniqueId from 'lodash/uniqueId'` ===> 2.6K
