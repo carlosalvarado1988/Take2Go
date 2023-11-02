@@ -215,3 +215,14 @@ eg. user+1@test.com -> user1test
 # adding push notifications
 
 - follow docs: https://docs.expo.dev/push-notifications/push-notifications-setup/
+
+# Optimize prod images
+
+- install `npm i -g sharp-cli`
+- run: `npx expo-optimize`
+
+- add vscode extension VS `import Cost` to see extension files
+  Try this:
+  `import lodash from 'lodash'` ===> 71.1K
+  `import { uniqueId } from 'lodash'` ===> 71.1K
+  `import uniqueId from 'lodash/uniqueId'` ===> 2.6K

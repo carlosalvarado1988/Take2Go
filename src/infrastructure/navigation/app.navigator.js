@@ -54,7 +54,9 @@ export const AppNavigator = () => {
     });
 
     notificationListener.current =
-      Notifications.addNotificationReceivedListener(() => {});
+      Notifications.addNotificationReceivedListener((notification) => {
+        console.log("notificationOnTap: ", notification);
+      });
 
     return () => {
       Notifications.removeNotificationSubscription(
