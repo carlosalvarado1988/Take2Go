@@ -48,11 +48,11 @@ export const CheckoutScreen = ({ navigation }) => {
     } catch (error) {
       setIsLoading(false);
       const msg = parseErrorMsg(error, "payRequest");
-      toast.show(msg, {
-        type: "danger",
-      });
+      // toast.show(msg, {
+      //   type: "danger",
+      // });
       navigation.navigate("CheckoutError", {
-        error,
+        msg,
       });
     }
   };
@@ -62,6 +62,7 @@ export const CheckoutScreen = ({ navigation }) => {
       <SafeAreaViewContainer>
         <CartIconContainer>
           <CartIcon icon="cart-off" />
+          <Spacer position="top" size="large" />
           <Text>Your cart is empty!</Text>
         </CartIconContainer>
       </SafeAreaViewContainer>
@@ -76,24 +77,27 @@ export const CheckoutScreen = ({ navigation }) => {
           <Spacer position="top" size="large">
             <Text>Your Order</Text>
             <List.Section>
-              {cart.map(({ item, price }) => (
-                <List.Item key={item} title={`${item} - $${price / 100}`} />
+              {cart.map(({ item, price }, index) => (
+                <List.Item key={index} title={`${item} - $${price / 100}`} />
               ))}
             </List.Section>
             <Text>Total: ${total / 100}</Text>
           </Spacer>
         </Spacer>
+
         <NameInput
           mode="flat"
           label="Name"
           value={name}
           onChangeText={setName}
         />
-        <Spacer position="top" size="large">
+        <Spacer position="top" size="medium">
           {name && <CreditCardInput name={name} onSuccess={setCard} />}
         </Spacer>
+
         <Spacer position="top" size="xl" />
         <PayButton
+          key="button-0"
           disabled={isLoading}
           icon="cash"
           mode="contained"
@@ -105,6 +109,7 @@ export const CheckoutScreen = ({ navigation }) => {
         </PayButton>
         <Spacer position="top" size="medium" />
         <ClearButton
+          key="button-1"
           disabled={isLoading}
           icon="cart-off"
           mode="contained"

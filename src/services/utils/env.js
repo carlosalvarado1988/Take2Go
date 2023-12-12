@@ -1,8 +1,10 @@
 import { Platform } from "react-native";
 import { DB_SOURCE } from "@env";
 
-// export const isDevelopment = process.env.NODE_ENV === "development";
+// control to use local vs cloud functions
+// for fetch places, geolocation and pay with stripe
 export const isDevelopment = false;
+// control to fetch real images or use mock images.
 export const isMock = true;
 
 export const FIREBASE_DB = "FIREBASE_DB";
@@ -21,9 +23,9 @@ export const getFunctionsHost = (func) =>
     : localFunctionsHost(func);
 
 // LOGS
-console.log("## DB_SOURCE: ", DB_SOURCE);
 console.log("## process.env.NODE_ENV: ", process.env.NODE_ENV);
 console.log("## isDevelopment: ", isDevelopment);
+console.log("## DB_SOURCE: ", DB_SOURCE);
 if (!isDevelopment && DB_SOURCE === FIREBASE_DB) {
-  console.log("## Google Functions in production could charge");
+  console.log("## Google Functions in production charge");
 }

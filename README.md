@@ -75,12 +75,12 @@ Make sure to check for updates and fixes from firebase functions by running the 
 Use this as a template to configure your credentials
 
 > DB_SOURCE=LOCAL_MOCK_DB or FIREBASE
-> FIREBASE_API_KEY=AIzaSyCbGFb4NzoGUOWLDX90o0V7eXbLMn5uCM4
-> AUTH_DOMAIN=catalog-dev-d9b6d.firebaseapp.com
-> PROJECT_ID=catalog-dev-d9b6d
-> STORAGE_BUCKET=catalog-dev-d9b6d.appspot.com
-> MESSAGING_SENDER_ID=780296218276
-> APP_ID=1:780296218276:web:47c97a1a9a0c4b55102831
+> FIREBASE_API_KEY=xxx...90o0V7eXbLMn5uCM4
+> AUTH_DOMAIN=abacs....firebaseapp.com
+> PROJECT_ID=abac...-d9b6d
+> STORAGE_BUCKET=sdasdsa.....appspot.com
+> MESSAGING_SENDER_ID=121...8276
+> APP_ID=1:213213...18276:web:47c97a1a9a0c4b55102831
 > MEASUREMENT_ID=NULL
 
 ## Deploying functions to firebase
@@ -211,10 +211,15 @@ eg. user+1@test.com -> user1test
 - you create a new function payRequest, with the stripe client
 - added pay function locally at `http://127.0.0.1:5001/catalog-12a8d/us-central1/pay`
 - [testing docs](https://stripe.com/docs/testing)
+- payments function deployed to google cloud.
+- flow, user info and card is wrapped to get a token (card.id), this is used to fetch a payment intent.
+- payment intent is going thru functions/pay
 
 # adding push notifications
 
 - follow docs: https://docs.expo.dev/push-notifications/push-notifications-setup/
+- it only runs in the phone, using a test tool. to actually work an ios paid account needs to be setup
+- current branch has a button in settings to trigger notifications in the phone only.
 
 # Optimize prod images
 
@@ -226,3 +231,28 @@ eg. user+1@test.com -> user1test
   `import lodash from 'lodash'` ===> 71.1K
   `import { uniqueId } from 'lodash'` ===> 71.1K
   `import uniqueId from 'lodash/uniqueId'` ===> 2.6K
+
+# Inspecting network requests (Debugging)
+
+- you add this tool `https://github.com/jhen0409/react-native-debugger`
+- This is a standalone app for debugging React Native apps:
+  -- Based on official Remote Debugger and provide more functionality.
+  -- Includes React Inspector from react-devtools-core.
+  -- Includes Redux DevTools, made the same API with redux-devtools-extension.
+  -- Includes Apollo Client DevTools (apollographql/apollo-client-devtools) as devtools extension.
+
+# Control in env.js to reduce risk of charges in GCP.
+
+file: `env.js`
+
+```
+  // control to use local vs cloud functions
+  // for fetch places, geolocation and pay with stripe
+  export const isDevelopment = false;
+  // control to fetch real images or use mock images.
+  export const isMock = true;
+```
+
+# Building IOS with EXPO
+
+- command: `expo publish`

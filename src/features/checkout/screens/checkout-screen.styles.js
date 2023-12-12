@@ -21,6 +21,7 @@ export const CartIcon = styled(Avatar.Icon).attrs({
 
 export const NameInput = styled(TextInput)`
   margin: ${(props) => props.theme.space[3]};
+  margin-left: ${(props) => props.theme.space[2]};
 `;
 
 export const PayButton = styled(Button).attrs({
